@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { lightTheme } from '../../../styles/theme';
@@ -112,7 +111,6 @@ const CastDummyImage = styled.div`
 `;
 const CastInfo = styled.div`
   margin: 1rem 1rem 1rem 1.5rem;
-  /* margin-bottom: 1.5rem; */
   font-weight: normal;
   font-size: 0.9rem;
   display: flex;
