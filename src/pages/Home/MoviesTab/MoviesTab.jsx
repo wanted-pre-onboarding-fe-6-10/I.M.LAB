@@ -31,6 +31,9 @@ const MoviesTab = () => {
       {focus === 0 && <NowPlayingList />}
       {focus === 1 && <TopRatedList />}
       {focus === 2 && <UpcomingList />}
+      <GuideText>
+        포스터를 클릭하면 상세 페이지로 이동합니다. (끝까지 스크롤하면 영화 더보기 버튼이 있어요! ➡)
+      </GuideText>
     </Box>
   );
 };
@@ -43,11 +46,13 @@ const Tabs = styled.div`
   display: flex;
   justify-content: space-between;
   align-self: center;
+  margin-top: 20px;
+  align-items: center;
 `;
 
 const Tab = styled.div`
   color: ${props => props.theme.subTextColor};
-  font-size: large;
+  font-size: 1.5em;
   font-weight: 400;
   width: 100%;
   text-align: center;
@@ -61,11 +66,19 @@ const Tab = styled.div`
   ${props =>
     props.focused &&
     `font-weight: 600;
+    font-size: 3em;
     color: ${props.theme.ownColor};
     :hover {
       color: ${props.theme.ownColorHover};
     }
   `}
+`;
+
+const GuideText = styled.div`
+  color: ${props => props.theme.subTextColor};
+  margin: 0 40px;
+  display: block;
+  text-align: end;
 `;
 
 export default MoviesTab;
