@@ -1,22 +1,38 @@
 import styled from 'styled-components';
+import { lightTheme, darkTheme } from '../../../styles/theme';
+import { GrNext, GrPrevious } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 
 const TopContents = ({ movies, toNext, toPrev }) => {
   const imgURL = process.env.REACT_APP_IMG_URL;
 
+  const navigate = useNavigate();
+  const movieOverView = movies.overview.substr(0, 150);
+  const toMovieDetail = path => {
+    navigate(`/movieDetail/${path}`);
+  };
+
   return (
     <Container>
-      <div onClick={() => toPrev(100)}>prev</div>
+      <MoveButton onClick={() => toPrev(100)}>
+        <GrPrevious />
+      </MoveButton>
       <Box bg={imgURL + movies.backdrop_path}>
-        <Poster src={imgURL + movies.poster_path} />
+        <Poster src={imgURL + movies.poster_path} onClick={() => toMovieDetail(movies.id)} />
         <Wrapper>
-          <Title>{movies.title}</Title>
-          <SubTitle>{movies.original_title}</SubTitle>
-          <OverView>{movies.release_date}</OverView>
-          <OverView>{movies.overview}</OverView>
-          <UserRate>회원점수 {movies.vote_average}점</UserRate>
+          <MovieTitle>
+            <Title>{movies.title}</Title>
+            <SubTitle>
+              {movies.original_title} <ReleaseDate>{movies.release_date}</ReleaseDate>
+            </SubTitle>
+          </MovieTitle>
+          <RateWrapper>회원점수 {Math.floor(movies.vote_average)} / 10 점</RateWrapper>
+          <OverView>{movieOverView.length ? movieOverView + ' ...' : movieOverView}</OverView>
         </Wrapper>
       </Box>
-      <div onClick={() => toNext(-100)}>next</div>
+      <MoveButton onClick={() => toNext(-100)}>
+        <GrNext />
+      </MoveButton>
     </Container>
   );
 };
@@ -27,7 +43,7 @@ const Container = styled.div`
   align-items: center;
   width: 100vw;
   padding: 3em;
-  background-color: #fff;
+  background-color: ${lightTheme.subBoxColor};
   float: left;
 `;
 
@@ -35,31 +51,90 @@ const Box = styled.div`
   display: flex;
   padding: 3em;
   position: relative;
-  background-image: ${props => `url(${props.bg})`};
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   width: 1440px;
   height: 500px;
+  &::before {
+    content: '';
+    position: absolute;
+    background-image: ${props => `url(${props.bg})`};
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+  }
 `;
 
 const Poster = styled.img`
   border-radius: 10px;
-  border: 2px solid #fff;
+  border: 2px solid ${lightTheme.boxColor};
+  position: relative;
+  &:hover {
+    margin: -1em;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 2em;
+  margin: 3em 3em;
+  position: relative;
 `;
 
-const Title = styled.h1``;
+const MoveButton = styled.button`
+  width: 100px;
+  margin: 1em;
+  border: none;
+  background-color: transparent;
+  font-size: 2em;
+  opacity: 0.1;
+  color: ${darkTheme.textColor};
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+`;
 
-const SubTitle = styled.h3``;
+const MovieTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2em;
+`;
 
-const OverView = styled.p``;
+const Title = styled.h1`
+  font-size: 2.5em;
+  font-weight: bold;
+  color: ${lightTheme.textColor};
+`;
 
-const UserRate = styled.p``;
+const SubTitle = styled.h3`
+  font-size: 1.5em;
+  color: #424242;
+`;
+
+const ReleaseDate = styled.span`
+  font-size: 0.7em;
+  color: #424242;
+  margin-left: 1em;
+`;
+
+const OverView = styled.p`
+  margin: 2em 0;
+  width: 85%;
+  font-size: 1em;
+  color: ${lightTheme.textColor};
+  line-height: 1.7em;
+`;
+
+const RateWrapper = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: ${lightTheme.textColor};
+`;
 
 export default TopContents;
