@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import YouTube from 'react-youtube';
+import styled from 'styled-components';
 import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/api';
-// https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<<api_key>>&language=en-US
+import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
+import Rating from '@mui/material/Rating';
 
 const DetailHeader = () => {
-  const [detailData, setDetailData] = useState({});
-  const [videosData, setVideosData] = useState({});
-  const [buyData, setBuyData] = useState({});
-  const getRequest = async () => {
-    await fetchMovieVides(557).then(result => setVideosData(result));
-    await fetchMovieBuy(557).then(result => setBuyData(result.results.KR));
-    await fetchMovieDetail(557).then(result => setDetailData(result));
-  };
+  const [detailData, setDetailData] = useState(null);
+  const [videosData, setVideosData] = useState(null);
+  const [buyData, setBuyData] = useState(null);
+  const [iconStatus, setIconStatus] = useState({
+    heartStatus: false,
+    markStatus: false,
+    rateStatus: false,
+  });
+  const [value, setValue] = useState('');
+
+  const { path } = useParams();
 
   useEffect(() => {
-    // [질문] api호출 여러개 있는데 이렇게 하는거 맞는지?
-    getRequest();
+    fetchMovieDetail(path).then(result => setDetailData(result));
+    fetchMovieVides(path).then(result => setVideosData(result));
+    fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
   }, []);
-
-  console.log(buyData);
 
   return (
     <div>
-      {/* [질문] : 이렇게 detailData가 받아온 후 jsx 읽히게끔 하는거 맞는지? <- 데이터 3개 중 1개가 늦게 받아지면 렌더안됨 */}
-      {detailData.id && (
-        <div style={{ position: 'relative', width: '100%', height: '500px' }}>
-          <img
+      {detailData && videosData && buyData && (
+        <Container>
+          <BackdropImg
             alt="img"
-            width="100%"
-            height="100%"
-            style={{ opacity: 0.3 }}
             src={`https://image.tmdb.org/t/p/original${detailData?.backdrop_path}`}
           />
 
-          {/* 질문 : iframe에 absolute로 지정 못해서 div을 만들었음. 마크업 이렇게 괜찮은지? */}
-          <div
+          <HeaderBox
             style={{
               position: 'absolute',
               width: '100%',
@@ -45,49 +45,107 @@ const DetailHeader = () => {
               gridTemplateColumns: '50% 50%',
             }}
           >
-            <iframe
-              width="96%"
-              height="453"
-              src={`https://www.youtube.com/embed/${videosData.results?.[0].key}?autoplay=1`} // [질문] 자동재생이 리로드?되야만 실행됨
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-            <div style={{ width: '100%' }}>
-              <h2>
-                {detailData.title}
-                &#40; {detailData.release_date?.slice(0, 4)} &#41;
-              </h2>
-              <p>
-                {detailData.adult ? 19 : '전체'}
-                {detailData.release_date}
-                {detailData.spoken_languages[0].name}
-                {detailData.genres.map(data => (
-                  <span key={data.id}>{data.name}</span>
-                ))}
-                {detailData.runtime}m
-              </p>
-              <p>{detailData.belongs_to_collection?.name}</p>
-              <p>{detailData.production_countries[0].iso_3166_1}</p>
-              <p>
+            {videosData.results?.[0] ? (
+              <YouTube
+                videoId={videosData.results?.[0].key}
+                opts={{
+                  width: '696',
+                  height: '376',
+                  playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                  },
+                }}
+              />
+            ) : (
+              <NoVideoBox>no video</NoVideoBox>
+            )}
+
+            <MovieInfoBox>
+              <TitleWrapper>
+                <Title>
+                  {detailData.title}
+                  &#40; {detailData.release_date?.slice(0, 4)} &#41;
+                </Title>
+                <IconWrapper>
+                  <IconButton
+                    onClick={() =>
+                      setIconStatus(prev => ({ ...prev, heartStatus: !prev.heartStatus }))
+                    }
+                    status={iconStatus.heartStatus}
+                  >
+                    <BsHeartFill />
+                  </IconButton>
+                  <IconButton
+                    onClick={() =>
+                      setIconStatus(prev => ({ ...prev, markStatus: !prev.markStatus }))
+                    }
+                    status={iconStatus.markStatus}
+                  >
+                    <BsFillBookmarkFill />
+                  </IconButton>
+                  <IconButton
+                    onClick={() =>
+                      setIconStatus(prev => ({ ...prev, rateStatus: !prev.rateStatus }))
+                    }
+                    status={iconStatus.rateStatus}
+                  >
+                    <BsFillStarFill />
+                  </IconButton>
+                  {/* 별점 */}
+                  <Rating
+                    name="half-rating"
+                    precision={0.5}
+                    value={value}
+                    style={{
+                      fontSize: '30px',
+                      backgroundColor: 'lightgray',
+                      border: `1px solid gray`,
+                      borderRadius: '10px',
+                      padding: '5px 10px',
+                    }}
+                    onChange={(e, newValue) => {
+                      setValue(newValue);
+                    }}
+                  />
+                </IconWrapper>
+              </TitleWrapper>
+
+              <InfoWrapper>
+                <Info>{detailData.adult ? 19 : '전체'}</Info>
+                <Info>{detailData.release_date}</Info>
+                <Info>{detailData.spoken_languages[0].name}</Info>
+                <Info>
+                  {detailData.genres.map(data => (
+                    <span key={data.id}>{data.name}</span>
+                  ))}
+                </Info>
+                <Info>{detailData.runtime}m</Info>
+              </InfoWrapper>
+
+              <InfoWrapper>
+                {detailData.belongs_to_collection
+                  ? detailData.belongs_to_collection?.name
+                  : 'none series'}
+              </InfoWrapper>
+
+              <InfoWrapper>
+                Product : {detailData.production_countries[0].iso_3166_1} ,
                 {detailData.production_companies.map(data => (
-                  <span key={data.id}>{data.name}</span>
+                  <span key={data.id}> {data.name} , </span>
                 ))}
-              </p>
-              <div style={{ display: 'flex' }}>
-                rate : {Math.floor(detailData.vote_average)}
-                <ul style={{ display: 'flex' }}>
-                  <li>좋아요</li>
-                  <li>북마크</li>
-                  <li>별표(클릭시 평점별5개)</li>
-                </ul>
-              </div>
-              <p>{detailData.tagline}</p>
-              <p>{detailData.overview}</p>
-              <div>
+              </InfoWrapper>
+
+              <RateWrapper>Rate : {Math.floor(detailData.vote_average)} / 10</RateWrapper>
+
+              <InfoWrapper>{detailData.tagline}</InfoWrapper>
+              <InfoWrapper>
+                <OverView>{detailData.overview}</OverView>
+              </InfoWrapper>
+
+              <BuyWrapper>
                 <div>
-                  buy
+                  <p>buy</p>
                   {buyData.buy?.map((data, idx) => (
                     <a href={`${BUY_URL[data.provider_name]}`} key={idx}>
                       <img
@@ -110,7 +168,7 @@ const DetailHeader = () => {
                   ))}
                 </div>
                 <div>
-                  rent
+                  <p>rent</p>
                   {buyData.rent?.map((data, idx) => (
                     <a href={`${BUY_URL[data.provider_name]}`} key={idx}>
                       <img
@@ -122,8 +180,6 @@ const DetailHeader = () => {
                       />
                     </a>
                   ))}
-                </div>
-                <div>
                   {buyData.free?.map((data, idx) => (
                     <img
                       key={idx}
@@ -134,14 +190,108 @@ const DetailHeader = () => {
                     />
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              </BuyWrapper>
+            </MovieInfoBox>
+          </HeaderBox>
+        </Container>
       )}
     </div>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 500px;
+`;
+
+const BackdropImg = styled.img`
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+`;
+
+const HeaderBox = styled.div`
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const NoVideoBox = styled.div`
+  width: 560px;
+  height: 315px;
+`;
+
+const MovieInfoBox = styled.div`
+  width: 100%;
+`;
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+`;
+
+const Title = styled.h2`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  padding-bottom: 10px;
+`;
+
+const IconButton = styled.button.attrs({ type: 'button' })`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  background-color: #af2828;
+  color: ${prop => (prop.status ? '#ffd000' : 'beige')};
+  border: none;
+  border-radius: 50%;
+`;
+
+const InfoWrapper = styled.p`
+  margin-bottom: 10px;
+`;
+
+const Info = styled.span`
+  margin-right: 10px;
+`;
+
+const RateWrapper = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+`;
+
+const OverView = styled.div`
+  width: 80%;
+  line-height: 20px;
+`;
+
+const BuyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+
+  p {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  img {
+    margin-right: 10px;
+  }
+`;
 
 export default DetailHeader;
 
