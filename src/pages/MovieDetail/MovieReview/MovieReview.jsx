@@ -24,6 +24,7 @@ function MovieReview() {
     detailData && (
       <MovieReviewBlock>
         <MovieInfo>
+          11
           <ReviewImage src={`${IMAGE_URL}/${detailData.poster_path}`} alt="posterImage" />
           <ReviewTextBox>
             <div className="reviewTextTop">
@@ -131,8 +132,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '70%',
-  height: '70%',
+  width: '50%',
+  height: '60%',
   bgcolor: 'background.paper',
   border: '1px solid #000',
   borderRadius: '8px',
