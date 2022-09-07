@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import MoviesTab from './MoviesTab/MoviesTab';
+import PopularMoviesList from './PopularMoviesList/PopularMoviesList';
 
 const Home = () => {
   return (
     <Container>
       Home Page
       <MoviesTab />
+      <PopularMoviesList />
     </Container>
   );
 };
