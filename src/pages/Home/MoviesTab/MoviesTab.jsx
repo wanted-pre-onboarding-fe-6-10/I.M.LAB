@@ -42,6 +42,7 @@ const Box = styled.div`
 const Tabs = styled.div`
   display: flex;
   justify-content: space-between;
+  align-self: center;
 `;
 
 const Tab = styled.div`
@@ -51,6 +52,7 @@ const Tab = styled.div`
   width: 100%;
   text-align: center;
   padding: 10px 0;
+  cursor: pointer;
 
   &:hover {
     color: ${props => props.theme.textColor};
@@ -65,7 +67,5 @@ const Tab = styled.div`
     }
   `}
 `;
-
-const SeeMoreButton = styled.div``;
 
 export default MoviesTab;
