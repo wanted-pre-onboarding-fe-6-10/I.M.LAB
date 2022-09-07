@@ -1,10 +1,12 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import { rearg } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { fetchNowPlayingMovie, fetchTopRatedMovie } from '../../api/api';
-import MovieCardList from '../../components/common/MovieCard/MovieCardList';
-import MovieCardGridBox from '../../components/common/MovieCard/GridBox';
-const TopRated = () => {
+import { fetchNowPlayingMovie, fetchTopRatedMovie, fetchUpcomingMovie } from '../../api/api';
+import { genres } from '../../utils/constant';
+import { sortBy } from '../../utils/sort';
+
+const TopRated2 = () => {
   const { ref, inView } = useInView();
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [total, setTotal] = useState(0);
@@ -55,6 +57,7 @@ const TopRated = () => {
       // console.log(sortResult);
     }
   }, [total]);
+
   useEffect(() => {
     if (status === 'loading') return;
     if (!hasNextPage) {
@@ -70,17 +73,23 @@ const TopRated = () => {
       {status === 'loading' ? (
         <>Loading...</>
       ) : (
-        <>
-          <MovieCardGridBox>
-            {topRatedMovieList.pages.map(res => (
-              <MovieCardList MovieListValue={res.results} key={`${res.page}-cardList`} />
-            ))}
-          </MovieCardGridBox>
+        <div>
+          {topRatedMovieList.pages.map((page, i) => (
+            <React.Fragment key={i}>
+              {page.results.map(v => (
+                <div key={v.id}>
+                  <div>{v.original_title}</div>
+                  <div>{v.title}</div>
+                  <div>{v.release_date}</div>
+                </div>
+              ))}
+            </React.Fragment>
+          ))}
           <div ref={ref}>{inView}</div>
-        </>
+        </div>
       )}
     </>
   );
 };
 
-export default TopRated;
+export default TopRated2;
