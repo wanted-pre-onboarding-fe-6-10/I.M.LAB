@@ -3,18 +3,26 @@ import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/api';
 import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
+import { TiDeleteOutline } from 'react-icons/ti';
 import Rating from '@mui/material/Rating';
 
 const DetailHeader = ({ path }) => {
   const [detailData, setDetailData] = useState(null);
   const [videosData, setVideosData] = useState(null);
-  const [buyData, setBuyData] = useState(null);
+  const [buyData = {}, setBuyData] = useState(null);
   const [iconStatus, setIconStatus] = useState({
     heartStatus: false,
     markStatus: false,
     rateStatus: false,
   });
-  const [value, setValue] = useState(0);
+  const [rateValue, setRateValue] = useState(0);
+  let [rateShow, setRateShow] = useState(false);
+
+  const { path } = useParams();
+
+  console.log(buyData);
+  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
+
   useEffect(() => {
     fetchMovieDetail(path).then(result => setDetailData(result));
     fetchMovieVides(path).then(result => setVideosData(result));
@@ -81,28 +89,47 @@ const DetailHeader = ({ path }) => {
                     <BsFillBookmarkFill />
                   </IconButton>
                   <IconButton
-                    onClick={() =>
-                      setIconStatus(prev => ({ ...prev, rateStatus: !prev.rateStatus }))
-                    }
-                    status={iconStatus.rateStatus}
+                    onClick={() => setRateShow(prev => !prev)} //  show만 조절
+                    status={rateValue > 0 ? true : false} //  색깔 조절
                   >
                     <BsFillStarFill />
                   </IconButton>
-                  <Rating
-                    name="half-rating"
-                    precision={0.5}
-                    value={value}
+
+                  {/* 평점 라벨 */}
+                  <RatingWrapper
                     style={{
-                      fontSize: '30px',
                       backgroundColor: 'lightgray',
                       border: `1px solid gray`,
                       borderRadius: '10px',
-                      padding: '5px 10px',
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
-                    onChange={(e, newValue) => {
-                      setValue(newValue);
-                    }}
-                  />
+                  >
+                    {rateShow && (
+                      <>
+                        <TiDeleteOutline
+                          onClick={() => setRateValue(0)}
+                          style={{
+                            fontSize: '24px',
+                            color: 'gray',
+                            marginLeft: '4px',
+                          }}
+                        />
+                        <Rating
+                          name="half-rating"
+                          precision={0.5}
+                          value={rateValue}
+                          style={{
+                            fontSize: '30px',
+                            // padding: '5px 10px', // [TODO]  수정해야함
+                          }}
+                          onChange={(e, newValue) => {
+                            setRateValue(newValue);
+                          }}
+                        />
+                      </>
+                    )}
+                  </RatingWrapper>
                 </IconWrapper>
               </TitleWrapper>
 
@@ -227,7 +254,7 @@ const MovieInfoBox = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 15px 0;
 `;
 
 const Title = styled.h2`
@@ -253,6 +280,10 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   color: ${prop => (prop.status ? '#ffd000' : 'beige')};
   border: none;
   border-radius: 50%;
+`;
+
+const RatingWrapper = styled.div`
+  //
 `;
 
 const InfoWrapper = styled.div`
