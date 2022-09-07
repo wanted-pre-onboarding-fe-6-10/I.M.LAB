@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/api';
 import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
 import Rating from '@mui/material/Rating';
 
-const DetailHeader = () => {
+const DetailHeader = ({ path }) => {
   const [detailData, setDetailData] = useState(null);
   const [videosData, setVideosData] = useState(null);
   const [buyData, setBuyData] = useState(null);
@@ -16,9 +15,6 @@ const DetailHeader = () => {
     rateStatus: false,
   });
   const [value, setValue] = useState(0);
-
-  const { path } = useParams();
-
   useEffect(() => {
     fetchMovieDetail(path).then(result => setDetailData(result));
     fetchMovieVides(path).then(result => setVideosData(result));
