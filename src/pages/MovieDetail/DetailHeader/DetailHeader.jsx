@@ -36,8 +36,7 @@ const DetailHeader = ({ path }) => {
       {detailData && videosData && buyData && (
         <Container>
           <BackdropImg
-            alt="img"
-            src={`https://image.tmdb.org/t/p/original${
+            imgUrl={`https://image.tmdb.org/t/p/original${
               detailData?.backdrop_path ?? detailData?.poster_path
             }`}
           />
@@ -57,8 +56,8 @@ const DetailHeader = ({ path }) => {
               <YouTube
                 videoId={videosData.results?.[0].key}
                 opts={{
-                  width: '696',
-                  height: '376',
+                  width: '720',
+                  height: '445',
                   playerVars: {
                     autoplay: 1,
                     mute: 1,
@@ -138,7 +137,7 @@ const DetailHeader = ({ path }) => {
               </TitleWrapper>
 
               <InfoWrapper>
-                <Info>{detailData.adult ? 19 : '전체'}</Info>
+                <Info>{detailData.adult ? '19세 이상' : '전체관람가'}</Info>
                 <Info>{detailData.release_date}</Info>
                 <Info>{detailData.spoken_languages[0].name}</Info>
                 <Info>
@@ -231,10 +230,11 @@ const Container = styled.div`
   height: 500px;
 `;
 
-const BackdropImg = styled.img`
+const BackdropImg = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0.5;
+  background-image: url(${prop => prop.imgUrl});
 `;
 
 const HeaderBox = styled.div`
@@ -250,11 +250,21 @@ const HeaderBox = styled.div`
 const NoVideoBox = styled.div`
   width: 560px;
   height: 315px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 `;
 
 const MovieInfoBox = styled.div`
-  width: 100%;
+  width: 90%;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
 `;
+
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -262,7 +272,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bold;
 `;
 
@@ -304,8 +314,8 @@ const RateWrapper = styled.div`
 `;
 
 const OverView = styled.div`
-  width: 80%;
-  line-height: 20px;
+  width: 95%;
+  line-height: 22px;
 `;
 
 const BuyWrapper = styled.div`
