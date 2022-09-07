@@ -5,9 +5,9 @@ import { fetchReview } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
 import { AiFillStar } from 'react-icons/ai';
 
-function MovieReviewModal() {
+function MovieReviewModal({ path }) {
   const [reviews, setReviews] = useState([]);
-  const { data } = useQuery(['reviews'], () => fetchReview(429));
+  const { data } = useQuery(['reviews'], () => fetchReview(path));
 
   useEffect(() => {
     if (data) {

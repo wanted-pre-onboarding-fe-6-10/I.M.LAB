@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightTheme } from '../../../styles/theme';
 import MovieReviewModal from '../MovieOpinion/MovieReviewModal';
@@ -12,6 +13,7 @@ function MovieReview() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { path } = useParams();
   return (
     <MovieReviewBlock>
       <MovieInfo>11</MovieInfo>
@@ -30,6 +32,8 @@ function MovieReview() {
           </Box>
         </Modal>
         <MovieReviewModal />
+        <ReviewButton>리뷰 쓰기</ReviewButton>
+        <MovieReviewModal path={path} />
       </MovieReviewBox>
     </MovieReviewBlock>
   );

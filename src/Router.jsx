@@ -11,7 +11,7 @@ const Router = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:movieId/:movieName/reviews" element={<MovieReview />} />
+        <Route path="/movieDetail/:path/reviews" element={<MovieReview />} />
         <Route path="/movieDetail/:path" element={<MovieDetail />} />
         <Route path="/top_rated" element={<TopRated />} />
       </Routes>

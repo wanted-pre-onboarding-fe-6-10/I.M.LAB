@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchKeywords } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
 
-function MovieExtraDetail() {
+function MovieExtraDetail({ path }) {
   const [keywords, setKeywords] = useState([]);
-  const { data } = useQuery(['keywords'], () => fetchKeywords(429));
+  const { data } = useQuery(['keywords'], () => fetchKeywords(path));
 
   useEffect(() => {
     if (data) {

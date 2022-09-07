@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { lightTheme } from '../../../styles/theme';
 import MovieReviewModal from './MovieReviewModal';
 
-function MovieOpinion() {
+function MovieOpinion({ path }) {
   return (
     <MovieOpinionBlock>
       <h3>사용자 의견</h3>
-      <MovieReviewModal />
+      <MovieReviewModal path={path} />
       <TotalReview>
         <Link to="reviews">모든 리뷰 보기</Link>
       </TotalReview>

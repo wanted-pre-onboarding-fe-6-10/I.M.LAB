@@ -5,19 +5,21 @@ import MovieCast from './MovieCast/MovieCast';
 import MovieOpinion from './MovieOpinion/MovieOpinion';
 import MovieSuggest from './MovieSuggest/MovieSuggest';
 import MovieExtraDetail from './MovieExtraDetail/MovieExtraDetail';
+import { useParams } from 'react-router-dom';
 
 const MovieMain = () => {
+  const { path } = useParams();
   return (
     <>
-      <DetailHeader />
+      <DetailHeader path={path} />
       <MovieDetailBlock>
         <MovieDetailLower>
-          <MovieCast />
-          <MovieOpinion />
-          <MovieSuggest />
+          <MovieCast path={path} />
+          <MovieOpinion path={path} />
+          <MovieSuggest path={path} />
         </MovieDetailLower>
         <MovieDetailAside>
-          <MovieExtraDetail />
+          <MovieExtraDetail path={path} />
         </MovieDetailAside>
       </MovieDetailBlock>
     </>
