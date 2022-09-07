@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 
 const TopContents = ({ movies, toNext, toPrev }) => {
   const imgURL = process.env.REACT_APP_IMG_URL;
-
   const navigate = useNavigate();
+
   const movieOverView = movies.overview.substr(0, 150);
-  const toMovieDetail = path => {
-    navigate(`/movieDetail/${path}`);
-  };
+  const toMovieDetail = path => navigate(`/movieDetail/${path}`);
+  const movieRate = `Rate : ${Math.floor(movies.vote_average)} / 10 점`;
 
   return (
     <Container>
+      <ContainerTitle>Popular Movies TOP 20</ContainerTitle>
       <MoveButton onClick={() => toPrev(100)}>
         <GrPrevious />
       </MoveButton>
@@ -26,7 +26,7 @@ const TopContents = ({ movies, toNext, toPrev }) => {
               {movies.original_title} <ReleaseDate>{movies.release_date}</ReleaseDate>
             </SubTitle>
           </MovieTitle>
-          <RateWrapper>회원점수 {Math.floor(movies.vote_average)} / 10 점</RateWrapper>
+          <RateWrapper>{movieRate}</RateWrapper>
           <OverView>{movieOverView.length ? movieOverView + ' ...' : movieOverView}</OverView>
         </Wrapper>
       </Box>
@@ -39,6 +39,7 @@ const TopContents = ({ movies, toNext, toPrev }) => {
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
@@ -80,7 +81,7 @@ const Poster = styled.img`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 3em 3em;
+  margin: 3em;
   position: relative;
 `;
 
@@ -135,6 +136,14 @@ const RateWrapper = styled.div`
   margin-bottom: 10px;
   font-weight: bold;
   color: ${lightTheme.textColor};
+`;
+
+const ContainerTitle = styled.div`
+  position: absolute;
+  top: 0.5em;
+  left: 10em;
+  font-size: 1.5em;
+  font-weight: bold;
 `;
 
 export default TopContents;
