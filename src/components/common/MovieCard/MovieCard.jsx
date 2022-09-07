@@ -1,36 +1,39 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fetchTopRatedMovie } from '../../../api/api';
 
-const MovieCard = () => {
-  const [topRated, setTopRated] = useState({});
+const MovieCard = ({ CardData }) => {
+  const [movieCardDate, setMovieCardDate] = useState('');
+  console.log(CardData);
   useEffect(() => {
-    const SetData = async () => {
-      const data = await fetchTopRatedMovie(1);
-      setTopRated(data.results[1]);
-      console.log(data.results[1]);
-    };
-    SetData();
+    setMovieCardDate(CardData);
   }, []);
   return (
     <>
-      <Container>
-        <Front>
-          <FrontImg src={`https://image.tmdb.org/t/p/w500${topRated.poster_path}`} />
-        </Front>
-        <Back>
-          <MovieHeader>
-            <Img src={`https://image.tmdb.org/t/p/w500${topRated.poster_path}`} />
-            <Title>{topRated.title}</Title>
-            <MovieMadeAt>{topRated.release_date}</MovieMadeAt>
-            <Rate>평점 8.4</Rate>
-          </MovieHeader>
-          <Desc>
-            <Overview>{topRated.overview}</Overview>
-          </Desc>
-        </Back>
-      </Container>
-      <MovieTitle>{topRated.title}</MovieTitle>
+      {movieCardDate ? (
+        <>
+          <div>
+            <Container>
+              <Front>
+                <FrontImg src={`https://image.tmdb.org/t/p/w500${movieCardDate.poster_path}`} />
+              </Front>
+              <Back>
+                <MovieHeader>
+                  <Img src={`https://image.tmdb.org/t/p/w500${movieCardDate.poster_path}`} />
+                  <Title>{movieCardDate.title}</Title>
+                  <MovieMadeAt>{movieCardDate.release_date}</MovieMadeAt>
+                  <Rate>평점 8.4</Rate>
+                </MovieHeader>
+                <Desc>
+                  <Overview>{movieCardDate.overview}</Overview>
+                </Desc>
+              </Back>
+            </Container>
+            <MovieTitle>{movieCardDate.title}</MovieTitle>
+          </div>
+        </>
+      ) : (
+        <div>Props값확인하세요.</div>
+      )}
     </>
   );
 };
