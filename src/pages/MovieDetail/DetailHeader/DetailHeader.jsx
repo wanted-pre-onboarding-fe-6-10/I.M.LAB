@@ -94,7 +94,7 @@ const DetailHeader = () => {
                   </IconButton>
                   <Rating
                     name="half-rating"
-                    precision={0.5}
+                    precision={0.4}
                     value={value}
                     style={{
                       fontSize: '30px',
