@@ -9,8 +9,21 @@ const ContentsBox = () => {
   const { isLoading, data } = useQuery(['topMovies'], () => fetchPopularMovie(pageNumber));
   const [moveImg, setMoveImg] = useState(0);
 
-  const handleMoveImg = value => {
-    setMoveImg(prev => prev + value);
+  const handleMoveNext = value => {
+    if (moveImg === -1900) {
+      setMoveImg(0);
+    } else {
+      setMoveImg(prev => prev + value);
+    }
+    console.log(moveImg);
+  };
+
+  const handleMovePrev = value => {
+    if (moveImg === 0) {
+      setMoveImg(-1900);
+    } else {
+      setMoveImg(prev => prev + value);
+    }
   };
 
   if (isLoading) return <span>is Loading</span>;
@@ -19,7 +32,14 @@ const ContentsBox = () => {
     <Container>
       <Box move={moveImg}>
         {(data.results || []).map(movie => {
-          return <TopContents key={movie.id} movies={movie} move={handleMoveImg} />;
+          return (
+            <TopContents
+              key={movie.id}
+              movies={movie}
+              toNext={handleMoveNext}
+              toPrev={handleMovePrev}
+            />
+          );
         })}
       </Box>
     </Container>

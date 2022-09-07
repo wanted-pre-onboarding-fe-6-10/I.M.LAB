@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const TopContents = ({ movies, move }) => {
+const TopContents = ({ movies, toNext, toPrev }) => {
   const posterURL = 'https://image.tmdb.org/t/p/original';
   const backdropURL = 'https://image.tmdb.org/t/p/original';
   return (
     <Container>
-      <div onClick={() => move(100)}>prev</div>
+      <div onClick={() => toPrev(100)}>prev</div>
       <Box bg={backdropURL + movies.backdrop_path}>
         <Poster src={posterURL + movies.poster_path} />
         <Wrapper>
@@ -16,7 +16,7 @@ const TopContents = ({ movies, move }) => {
           <UserRate>회원점수 {movies.vote_average}점</UserRate>
         </Wrapper>
       </Box>
-      <div onClick={() => move(-100)}>next</div>
+      <div onClick={() => toNext(-100)}>next</div>
     </Container>
   );
 };
