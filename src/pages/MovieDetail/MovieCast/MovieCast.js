@@ -21,37 +21,39 @@ function MovieCast({ path }) {
   }, [movieCredits]);
 
   return (
-    <MovieCastBlock>
-      <h3>주요 출연진</h3>
-      <SwiperBox>
-        <Swiper
-          navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-          modules={[Navigation]}
-          spaceBetween={30}
-          slidesPerView="auto"
-        >
-          {casts.map(cast => (
-            <SwiperSlide key={cast.cast_id}>
-              {cast.profile_path ? (
-                <CastImage src={`${IMAGE_URL}/${cast.profile_path}`} alt="castProfile" />
-              ) : (
-                <CastDummyImage />
-              )}
-              <CastInfo>
-                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{cast.name}</span>
-                <span>{cast.character}</span>
-              </CastInfo>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-next">
-            <BsFillArrowRightCircleFill />
-          </div>
-          <div className="swiper-button-prev">
-            <BsFillArrowLeftCircleFill />
-          </div>
-        </Swiper>
-      </SwiperBox>
-    </MovieCastBlock>
+    casts && (
+      <MovieCastBlock>
+        <h3>주요 출연진</h3>
+        <SwiperBox>
+          <Swiper
+            navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+            modules={[Navigation]}
+            spaceBetween={30}
+            slidesPerView="auto"
+          >
+            {casts.map(cast => (
+              <SwiperSlide key={cast.cast_id}>
+                {cast.profile_path ? (
+                  <CastImage src={`${IMAGE_URL}/${cast.profile_path}`} alt="castProfile" />
+                ) : (
+                  <CastDummyImage />
+                )}
+                <CastInfo>
+                  <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{cast.name}</span>
+                  <span>{cast.character}</span>
+                </CastInfo>
+              </SwiperSlide>
+            ))}
+            <div className="swiper-button-next">
+              <BsFillArrowRightCircleFill />
+            </div>
+            <div className="swiper-button-prev">
+              <BsFillArrowLeftCircleFill />
+            </div>
+          </Swiper>
+        </SwiperBox>
+      </MovieCastBlock>
+    )
   );
 }
 
