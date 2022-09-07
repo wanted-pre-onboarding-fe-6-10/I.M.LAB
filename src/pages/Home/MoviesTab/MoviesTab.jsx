@@ -45,28 +45,23 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.div`
-  text-decoration: solid;
-  /* color: ${props => props.theme.textColor}; */
-  color: gray;
-
+  color: ${props => props.theme.subTextColor};
   font-size: large;
-  font-weight: 300;
+  font-weight: 400;
   width: 100%;
   text-align: center;
   padding: 10px 0;
+
   &:hover {
-    background-color: ${props => props.theme.subBgColor};
-    color: white;
+    color: ${props => props.theme.textColor};
   }
 
   ${props =>
     props.focused &&
-    ` font-weight: 600;
-      color: white;
-       &:hover {
-      -color: ${props => props.theme.subBgColor};
-      color: blue;
-      
+    `font-weight: 600;
+    color: ${props.theme.ownColor};
+    :hover {
+      color: ${props.theme.ownColorHover};
     }
   `}
 `;

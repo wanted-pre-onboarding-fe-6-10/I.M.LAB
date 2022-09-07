@@ -5,7 +5,6 @@ import PopularMoviesList from './PopularMoviesList/PopularMoviesList';
 const Home = () => {
   return (
     <Container>
-      Home Page
       <MoviesTab />
       <PopularMoviesList />
     </Container>
@@ -14,7 +13,7 @@ const Home = () => {
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: black;
+  background-color: ${props => props.theme.bgColor};
 `;
 
 export default Home;

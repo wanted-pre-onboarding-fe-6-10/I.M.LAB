@@ -32,7 +32,9 @@ const Box = styled.div`
 `;
 
 const Header = styled.h2`
-  color: white;
+  color: ${props => props.theme.textColor};
+  font-size: xx-large;
+  font-weight: 600;
 `;
 
 const Wrapper = styled.div`
@@ -41,9 +43,9 @@ const Wrapper = styled.div`
   max-width: 100%;
   /* grid-column-gap: 5px; */
 
-  /* @media (max-width: 650px) {
-    grid-template-columns: 1fr;
-  } */
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export default PopularMoviesList;
