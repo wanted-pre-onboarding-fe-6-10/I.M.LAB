@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightTheme } from '../../../styles/theme';
 import MovieReviewModal from '../MovieOpinion/MovieReviewModal';
-import ReviewWritte from './ReviewWritte';
+import ReviewWrite from './ReviewWrite';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -28,11 +28,9 @@ function MovieReview() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ReviewWritte />
+            <ReviewWrite />
           </Box>
         </Modal>
-        <MovieReviewModal />
-        <ReviewButton>리뷰 쓰기</ReviewButton>
         <MovieReviewModal path={path} />
       </MovieReviewBox>
     </MovieReviewBlock>
