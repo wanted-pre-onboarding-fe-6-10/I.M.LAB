@@ -13,7 +13,6 @@ const TopContents = ({ movies, toNext, toPrev }) => {
 
   return (
     <Container>
-      <ContainerTitle>Popular Movies TOP 20</ContainerTitle>
       <MoveButton onClick={() => toPrev(100)}>
         <GrPrevious />
       </MoveButton>
@@ -53,7 +52,7 @@ const Box = styled.div`
   padding: 3em;
   position: relative;
   width: 1440px;
-  height: 500px;
+  height: 400px;
   &::before {
     content: '';
     position: absolute;
@@ -71,8 +70,9 @@ const Box = styled.div`
 
 const Poster = styled.img`
   border-radius: 10px;
-  border: 2px solid ${lightTheme.boxColor};
+  border: 3px solid ${lightTheme.borderColor};
   position: relative;
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
   &:hover {
     margin: -1em;
   }
@@ -81,7 +81,7 @@ const Poster = styled.img`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 3em;
+  margin: 1em 3em;
   position: relative;
 `;
 
@@ -107,7 +107,7 @@ const MovieTitle = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 2.5em;
+  font-size: 2.2em;
   font-weight: bold;
   color: ${lightTheme.textColor};
 `;
@@ -125,7 +125,7 @@ const ReleaseDate = styled.span`
 
 const OverView = styled.p`
   margin: 2em 0;
-  width: 85%;
+  width: 70%;
   font-size: 1em;
   color: ${lightTheme.textColor};
   line-height: 1.7em;
@@ -136,14 +136,6 @@ const RateWrapper = styled.div`
   margin-bottom: 10px;
   font-weight: bold;
   color: ${lightTheme.textColor};
-`;
-
-const ContainerTitle = styled.div`
-  position: absolute;
-  top: 0.5em;
-  left: 10em;
-  font-size: 1.5em;
-  font-weight: bold;
 `;
 
 export default TopContents;
