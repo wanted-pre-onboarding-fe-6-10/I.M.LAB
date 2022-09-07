@@ -1,26 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DetailHeader } from './DetailHeader';
 import MovieCast from './MovieCast/MovieCast';
-import MovieExtraDetail from './MovieExtraDetail/MovieExtraDetail';
 import MovieOpinion from './MovieOpinion/MovieOpinion';
 import MovieSuggest from './MovieSuggest/MovieSuggest';
+import MovieExtraDetail from './MovieExtraDetail/MovieExtraDetail';
 
-function MovieDetail() {
+const MovieMain = () => {
   return (
-    <MovieDetailBlock>
-      <MovieDetailLower>
-        <MovieCast />
-        <MovieOpinion />
-        <MovieSuggest />
-      </MovieDetailLower>
-      <MovieDetailAside>
-        <MovieExtraDetail />
-      </MovieDetailAside>
-    </MovieDetailBlock>
+    <>
+      <DetailHeader />
+      <MovieDetailBlock>
+        <MovieDetailLower>
+          <MovieCast />
+          <MovieOpinion />
+          <MovieSuggest />
+        </MovieDetailLower>
+        <MovieDetailAside>
+          <MovieExtraDetail />
+        </MovieDetailAside>
+      </MovieDetailBlock>
+    </>
   );
-}
+};
 
-export default MovieDetail;
+export default MovieMain;
 
 const MovieDetailBlock = styled.div`
   width: 1440px;

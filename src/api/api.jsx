@@ -1,5 +1,5 @@
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
-const API_KEY = 'a92c477879b1b8dd0cd8d88a9ec7f20a';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export async function fetchPopularMovie(page) {
   return await fetch(
@@ -49,6 +49,12 @@ export async function fetchImage() {
   );
 }
 
+export async function fetchMovieVides(id) {
+  return await fetch(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=ko-KR`).then(res =>
+    res.json()
+  );
+}
+
 export async function fetchReview(id) {
   return await fetch(`${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=ko-KR`).then(
     res => res.json()
@@ -63,4 +69,10 @@ export async function fetchRecommendations(id) {
 
 export async function fetchKeywords(id) {
   return await fetch(`${BASE_URL}/movie/${id}/keywords?api_key=${API_KEY}`).then(res => res.json());
+}
+
+export async function fetchMovieBuy(id) {
+  return await fetch(
+    `${BASE_URL}/movie/${id}/watch/providers?api_key=${API_KEY}&language=ko-KR`
+  ).then(res => res.json());
 }
