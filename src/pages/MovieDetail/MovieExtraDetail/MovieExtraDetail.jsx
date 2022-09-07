@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import { fetchKeywords } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
+import { useSelector } from 'react-redux';
+import addComma from '../../../utils/addComma';
 
 function MovieExtraDetail({ path }) {
   const [keywords, setKeywords] = useState([]);
   const { data: movieKeywords } = useQuery(['keywords'], () => fetchKeywords(path));
+  const detailData = useSelector(state => state.movies[path]);
 
   useEffect(() => {
     if (movieKeywords) {
@@ -15,33 +18,35 @@ function MovieExtraDetail({ path }) {
   }, [movieKeywords]);
 
   return (
-    <MovieExtraDetailBlock>
-      <ExtraDetailBox>
-        <span>원제</span>
-        <span>11</span>
-      </ExtraDetailBox>
-      <ExtraDetailBox>
-        <span>상태</span>
-        <span>11</span>
-      </ExtraDetailBox>
-      <ExtraDetailBox>
-        <span>원어</span>
-        <span>11</span>
-      </ExtraDetailBox>
-      <ExtraDetailBox>
-        <span>제작비</span>
-        <span>11</span>
-      </ExtraDetailBox>
-      <ExtraDetailBox>
-        <span>수익</span>
-        <span>11</span>
-      </ExtraDetailBox>
-      <ExtraKeywordBox>
-        {keywords.map(keyword => (
-          <ExtraKeywordWrapper key={keyword.id}>{keyword.name}</ExtraKeywordWrapper>
-        ))}
-      </ExtraKeywordBox>
-    </MovieExtraDetailBlock>
+    detailData && (
+      <MovieExtraDetailBlock>
+        <ExtraDetailBox>
+          <span>원제</span>
+          <span>{detailData.original_title}</span>
+        </ExtraDetailBox>
+        <ExtraDetailBox>
+          <span>상태</span>
+          <span>{detailData.status}</span>
+        </ExtraDetailBox>
+        <ExtraDetailBox>
+          <span>원어</span>
+          <span>{detailData.original_language}</span>
+        </ExtraDetailBox>
+        <ExtraDetailBox>
+          <span>제작비</span>
+          <span>${addComma(detailData.budget)}</span>
+        </ExtraDetailBox>
+        <ExtraDetailBox>
+          <span>수익</span>
+          <span>${addComma(detailData.revenue)}</span>
+        </ExtraDetailBox>
+        <ExtraKeywordBox>
+          {keywords.map(keyword => (
+            <ExtraKeywordWrapper key={keyword.id}>{keyword.name}</ExtraKeywordWrapper>
+          ))}
+        </ExtraKeywordBox>
+      </MovieExtraDetailBlock>
+    )
   );
 }
 
