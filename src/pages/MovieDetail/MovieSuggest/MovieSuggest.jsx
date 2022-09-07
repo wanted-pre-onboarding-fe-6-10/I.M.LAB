@@ -21,33 +21,38 @@ function MovieSuggest({ path }) {
   }, [movieRecommend]);
 
   return (
-    <MovieSuggestBlock>
-      <h3>추천</h3>
-      <SwiperBox>
-        <Swiper
-          navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-          modules={[Navigation]}
-          spaceBetween={30}
-          slidesPerView={4}
-        >
-          {recommends.map(recommend => (
-            <SwiperSlide key={recommend.id}>
-              <RecommendImage src={`${IMAGE_URL}/${recommend.backdrop_path}`} alt="recommendImg" />
-              <RecommendInfo>
-                <span>{recommend.title}</span>
-                <span>{Math.round(recommend.vote_average * 10)}%</span>
-              </RecommendInfo>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-next">
-            <BsFillArrowRightCircleFill />
-          </div>
-          <div className="swiper-button-prev">
-            <BsFillArrowLeftCircleFill />
-          </div>
-        </Swiper>
-      </SwiperBox>
-    </MovieSuggestBlock>
+    movieRecommend && (
+      <MovieSuggestBlock>
+        <h3>추천</h3>
+        <SwiperBox>
+          <Swiper
+            navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+            modules={[Navigation]}
+            spaceBetween={30}
+            slidesPerView={4}
+          >
+            {recommends.map(recommend => (
+              <SwiperSlide key={recommend.id}>
+                <RecommendImage
+                  src={`${IMAGE_URL}/${recommend.backdrop_path}`}
+                  alt="recommendImg"
+                />
+                <RecommendInfo>
+                  <span>{recommend.title}</span>
+                  <span>{Math.round(recommend.vote_average * 10)}%</span>
+                </RecommendInfo>
+              </SwiperSlide>
+            ))}
+            <div className="swiper-button-next">
+              <BsFillArrowRightCircleFill />
+            </div>
+            <div className="swiper-button-prev">
+              <BsFillArrowLeftCircleFill />
+            </div>
+          </Swiper>
+        </SwiperBox>
+      </MovieSuggestBlock>
+    )
   );
 }
 

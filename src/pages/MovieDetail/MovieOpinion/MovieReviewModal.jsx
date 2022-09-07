@@ -15,31 +15,34 @@ function MovieReviewModal({ path }) {
     }
   }, [movieReviews]);
 
-  return reviews.length === 0 ? (
-    <MovieOpinionBlank>
-      <span>리뷰가 없습니다</span>
-    </MovieOpinionBlank>
-  ) : (
-    reviews.map((review, index) => (
-      <MovieOpinionBox key={index}>
-        {review.author_details.avatar_path ? <AuthorImage /> : <AuthorImageDummy />}
-        <AuthorDetailWrapper>
-          <AuthorDetailUpper>
-            <div className="upperTitle">
-              <span style={{ fontWeight: 'bold' }}>{review.author}의 리뷰</span>
-              <div className="rating">
-                <AiFillStar />
-                <span> {review.author_details.rating}</span>
+  return (
+    movieReviews &&
+    (reviews.length === 0 ? (
+      <MovieOpinionBlank>
+        <span>리뷰가 없습니다</span>
+      </MovieOpinionBlank>
+    ) : (
+      reviews.map((review, index) => (
+        <MovieOpinionBox key={index}>
+          {review.author_details.avatar_path ? <AuthorImage /> : <AuthorImageDummy />}
+          <AuthorDetailWrapper>
+            <AuthorDetailUpper>
+              <div className="upperTitle">
+                <span style={{ fontWeight: 'bold' }}>{review.author}의 리뷰</span>
+                <div className="rating">
+                  <AiFillStar />
+                  <span> {review.author_details.rating}</span>
+                </div>
               </div>
-            </div>
-            <span style={{ fontSize: '0.9rem' }}>
-              <span style={{ fontWeight: 500 }}>{review.author_details.name}</span>(이)가{' '}
-              {review.created_at}에 작성
-            </span>
-          </AuthorDetailUpper>
-          <AuthorDetailLower>{review.content}</AuthorDetailLower>
-        </AuthorDetailWrapper>
-      </MovieOpinionBox>
+              <span style={{ fontSize: '0.9rem' }}>
+                <span style={{ fontWeight: 500 }}>{review.author_details.name}</span>(이)가{' '}
+                {review.created_at.slice(0, 10)}에 작성
+              </span>
+            </AuthorDetailUpper>
+            <AuthorDetailLower>{review.content}</AuthorDetailLower>
+          </AuthorDetailWrapper>
+        </MovieOpinionBox>
+      ))
     ))
   );
 }
