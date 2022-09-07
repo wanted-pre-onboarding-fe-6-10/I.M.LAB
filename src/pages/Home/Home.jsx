@@ -1,5 +1,7 @@
+import ContentsBox from './top-contents/ContentsBox';
+
 const Home = () => {
-  return <>Home Page</>;
+  return <ContentsBox />;
 };
 
 export default Home;
