@@ -37,10 +37,38 @@ export async function fetchSearchMovie(query, page) {
   ).then(res => res.json());
 }
 
+export async function fetchMovieCredits(id) {
+  return await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=ko-KR`).then(
+    res => res.json()
+  );
+}
+
+export async function fetchImage() {
+  return await fetch(`https://image.tmdb.org/t/p/w500/bApc0wbQ8O1DHt3AdLAM5hECmXX.jpg`).then(res =>
+    res.json()
+  );
+}
+
 export async function fetchMovieVides(id) {
   return await fetch(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=ko-KR`).then(res =>
     res.json()
   );
+}
+
+export async function fetchReview(id) {
+  return await fetch(`${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=ko-KR`).then(
+    res => res.json()
+  );
+}
+
+export async function fetchRecommendations(id) {
+  return await fetch(
+    `${BASE_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=ko-KR&page=1`
+  ).then(res => res.json());
+}
+
+export async function fetchKeywords(id) {
+  return await fetch(`${BASE_URL}/movie/${id}/keywords?api_key=${API_KEY}`).then(res => res.json());
 }
 
 export async function fetchMovieBuy(id) {
