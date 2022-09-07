@@ -3,6 +3,8 @@ import Router from './Router';
 import GlobalStyle from './styles/GlobalStyle';
 import { lightTheme } from './styles/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { store } from './store/store';
+import { Provider } from 'react-redux';
 
 function App() {
   const queryClient = new QueryClient({
@@ -18,7 +20,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={lightTheme}>
         <GlobalStyle />
-        <Router />
+        <Provider store={store}>
+          <Router />
+        </Provider>
       </ThemeProvider>
     </QueryClientProvider>
   );
