@@ -9,51 +9,51 @@ import { lightTheme } from '../../../styles/theme';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovieCredits } from '../../../api/api';
 
+const IMAGE_URL = process.env.REACT_APP_IMG_BASE_URL;
 function MovieCast({ path }) {
   const [casts, setCasts] = useState([]);
-  const { data } = useQuery(['detail'], () => fetchMovieCredits(path));
+  const { data: movieCredits } = useQuery(['detail'], () => fetchMovieCredits(path));
 
   useEffect(() => {
-    if (data) {
-      setCasts(data.cast);
+    if (movieCredits) {
+      setCasts(movieCredits.cast);
     }
-  }, [data]);
+  }, [movieCredits]);
 
   return (
-    <MovieCastBlock>
-      <h3>주요 출연진</h3>
-      <SwiperBox>
-        <Swiper
-          navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-          modules={[Navigation]}
-          spaceBetween={30}
-          slidesPerView="auto"
-        >
-          {casts.map(cast => (
-            <SwiperSlide key={cast.cast_id}>
-              {cast.profile_path ? (
-                <CastImage
-                  src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-                  alt="castProfile"
-                />
-              ) : (
-                <CastDummyImage />
-              )}
-              <CastInfo>
-                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{cast.name}</span>
-                <span>{cast.character}</span>
-              </CastInfo>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-next">
-            <BsFillArrowRightCircleFill />
-          </div>
-          <div className="swiper-button-prev">
-            <BsFillArrowLeftCircleFill />
-          </div>
-        </Swiper>
-      </SwiperBox>
-    </MovieCastBlock>
+    casts && (
+      <MovieCastBlock>
+        <h3>주요 출연진</h3>
+        <SwiperBox>
+          <Swiper
+            navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+            modules={[Navigation]}
+            spaceBetween={30}
+            slidesPerView="auto"
+          >
+            {casts.map(cast => (
+              <SwiperSlide key={cast.cast_id}>
+                {cast.profile_path ? (
+                  <CastImage src={`${IMAGE_URL}/${cast.profile_path}`} alt="castProfile" />
+                ) : (
+                  <CastDummyImage />
+                )}
+                <CastInfo>
+                  <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{cast.name}</span>
+                  <span>{cast.character}</span>
+                </CastInfo>
+              </SwiperSlide>
+            ))}
+            <div className="swiper-button-next">
+              <BsFillArrowRightCircleFill />
+            </div>
+            <div className="swiper-button-prev">
+              <BsFillArrowLeftCircleFill />
+            </div>
+          </Swiper>
+        </SwiperBox>
+      </MovieCastBlock>
+    )
   );
 }
 

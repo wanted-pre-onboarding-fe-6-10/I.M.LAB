@@ -18,7 +18,6 @@ const DetailHeader = ({ path }) => {
   });
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
-  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   const dispatch = useDispatch();
   const detailData = useSelector(state => state.movies[path]);
@@ -29,7 +28,7 @@ const DetailHeader = ({ path }) => {
     });
     fetchMovieVides(path).then(result => setVideosData(result));
     fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
-  }, []);
+  }, [dispatch, path]);
 
   return (
     <div>
@@ -286,9 +285,7 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   border-radius: 50%;
 `;
 
-const RatingWrapper = styled.div`
-  //
-`;
+const RatingWrapper = styled.div``;
 
 const InfoWrapper = styled.div`
   margin-bottom: 10px;

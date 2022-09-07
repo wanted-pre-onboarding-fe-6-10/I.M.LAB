@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Rating from '@mui/material/Rating';
 
-const ReviewWritte = () => {
+const ReviewWrite = () => {
   let [rateValue, setRateValue] = useState(0);
 
   return (
-    <WritteContainer>
+    <WriteContainer>
       <Header>
         <HeaderMessage>별점을 선택해주세요.</HeaderMessage>
         <RatingBox>
@@ -27,11 +27,11 @@ const ReviewWritte = () => {
           <textarea />
         </section>
       </Header>
-    </WritteContainer>
+    </WriteContainer>
   );
 };
 
-const WritteContainer = styled.div`
+const WriteContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: aliceblue;
@@ -64,4 +64,4 @@ const TextArea = styled.textarea`
   //
 `;
 
-export default ReviewWritte;
+export default ReviewWrite;

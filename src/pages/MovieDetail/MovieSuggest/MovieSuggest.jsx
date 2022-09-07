@@ -9,47 +9,50 @@ import styled from 'styled-components';
 import { fetchRecommendations } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
 
+const IMAGE_URL = process.env.REACT_APP_IMG_BASE_URL;
 function MovieSuggest({ path }) {
   const [recommends, setRecommend] = useState([]);
-  const { data } = useQuery(['recommendation'], () => fetchRecommendations(path));
+  const { data: movieRecommend } = useQuery(['recommendation'], () => fetchRecommendations(path));
 
   useEffect(() => {
-    if (data) {
-      setRecommend(data.results);
+    if (movieRecommend) {
+      setRecommend(movieRecommend.results);
     }
-  }, [data]);
+  }, [movieRecommend]);
 
   return (
-    <MovieSuggestBlock>
-      <h3>추천</h3>
-      <SwiperBox>
-        <Swiper
-          navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-          modules={[Navigation]}
-          spaceBetween={30}
-          slidesPerView={4}
-        >
-          {recommends.map(recommend => (
-            <SwiperSlide key={recommend.id}>
-              <RecommendImage
-                src={`https://image.tmdb.org/t/p/w500/${recommend.backdrop_path}`}
-                alt="recommendImg"
-              />
-              <RecommendInfo>
-                <span>{recommend.title}</span>
-                <span>{Math.round(recommend.vote_average * 10)}%</span>
-              </RecommendInfo>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-next">
-            <BsFillArrowRightCircleFill />
-          </div>
-          <div className="swiper-button-prev">
-            <BsFillArrowLeftCircleFill />
-          </div>
-        </Swiper>
-      </SwiperBox>
-    </MovieSuggestBlock>
+    movieRecommend && (
+      <MovieSuggestBlock>
+        <h3>추천</h3>
+        <SwiperBox>
+          <Swiper
+            navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+            modules={[Navigation]}
+            spaceBetween={30}
+            slidesPerView={4}
+          >
+            {recommends.map(recommend => (
+              <SwiperSlide key={recommend.id}>
+                <RecommendImage
+                  src={`${IMAGE_URL}/${recommend.backdrop_path}`}
+                  alt="recommendImg"
+                />
+                <RecommendInfo>
+                  <span>{recommend.title}</span>
+                  <span>{Math.round(recommend.vote_average * 10)}%</span>
+                </RecommendInfo>
+              </SwiperSlide>
+            ))}
+            <div className="swiper-button-next">
+              <BsFillArrowRightCircleFill />
+            </div>
+            <div className="swiper-button-prev">
+              <BsFillArrowLeftCircleFill />
+            </div>
+          </Swiper>
+        </SwiperBox>
+      </MovieSuggestBlock>
+    )
   );
 }
 
