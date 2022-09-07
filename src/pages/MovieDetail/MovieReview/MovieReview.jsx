@@ -24,7 +24,6 @@ function MovieReview() {
     detailData && (
       <MovieReviewBlock>
         <MovieInfo>
-          11
           <ReviewImage src={`${IMAGE_URL}/${detailData.poster_path}`} alt="posterImage" />
           <ReviewTextBox>
             <div className="reviewTextTop">
