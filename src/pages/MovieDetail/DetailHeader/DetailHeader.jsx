@@ -18,8 +18,6 @@ const DetailHeader = ({ path }) => {
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
 
-  const { path } = useParams();
-
   console.log(buyData);
   // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
