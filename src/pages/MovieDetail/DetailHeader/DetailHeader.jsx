@@ -5,9 +5,10 @@ import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/a
 import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Rating from '@mui/material/Rating';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../../../store/movieSlice';
 
 const DetailHeader = ({ path }) => {
-  const [detailData, setDetailData] = useState(null);
   const [videosData, setVideosData] = useState(null);
   const [buyData = {}, setBuyData] = useState(null);
   const [iconStatus, setIconStatus] = useState({
@@ -18,24 +19,25 @@ const DetailHeader = ({ path }) => {
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
 
-  const { path } = useParams();
-
-  console.log(buyData);
-  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
+  const dispatch = useDispatch();
+  const detailData = useSelector(state => state.movies[path]);
 
   useEffect(() => {
-    fetchMovieDetail(path).then(result => setDetailData(result));
+    fetchMovieDetail(path).then(result => {
+      dispatch(add(result));
+    });
     fetchMovieVides(path).then(result => setVideosData(result));
     fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
-  }, []);
+  }, [dispatch, path]);
 
   return (
     <div>
       {detailData && videosData && buyData && (
         <Container>
           <BackdropImg
-            alt="img"
-            src={`https://image.tmdb.org/t/p/original${detailData?.backdrop_path}`}
+            imgUrl={`https://image.tmdb.org/t/p/original${
+              detailData?.backdrop_path ?? detailData?.poster_path
+            }`}
           />
 
           <HeaderBox
@@ -53,8 +55,8 @@ const DetailHeader = ({ path }) => {
               <YouTube
                 videoId={videosData.results?.[0].key}
                 opts={{
-                  width: '696',
-                  height: '376',
+                  width: '720',
+                  height: '445',
                   playerVars: {
                     autoplay: 1,
                     mute: 1,
@@ -89,13 +91,12 @@ const DetailHeader = ({ path }) => {
                     <BsFillBookmarkFill />
                   </IconButton>
                   <IconButton
-                    onClick={() => setRateShow(prev => !prev)} //  show만 조절
-                    status={rateValue > 0 ? true : false} //  색깔 조절
+                    onClick={() => setRateShow(prev => !prev)}
+                    status={rateValue > 0 ? true : false}
                   >
                     <BsFillStarFill />
                   </IconButton>
 
-                  {/* 평점 라벨 */}
                   <RatingWrapper
                     style={{
                       backgroundColor: 'lightgray',
@@ -134,7 +135,7 @@ const DetailHeader = ({ path }) => {
               </TitleWrapper>
 
               <InfoWrapper>
-                <Info>{detailData.adult ? 19 : '전체'}</Info>
+                <Info>{detailData.adult ? '19세 이상' : '전체관람가'}</Info>
                 <Info>{detailData.release_date}</Info>
                 <Info>{detailData.spoken_languages[0].name}</Info>
                 <Info>
@@ -227,10 +228,11 @@ const Container = styled.div`
   height: 500px;
 `;
 
-const BackdropImg = styled.img`
+const BackdropImg = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0.5;
+  background-image: url(${prop => prop.imgUrl});
 `;
 
 const HeaderBox = styled.div`
@@ -246,11 +248,21 @@ const HeaderBox = styled.div`
 const NoVideoBox = styled.div`
   width: 560px;
   height: 315px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 `;
 
 const MovieInfoBox = styled.div`
-  width: 100%;
+  width: 90%;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
 `;
+
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -258,7 +270,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bold;
 `;
 
@@ -282,9 +294,7 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   border-radius: 50%;
 `;
 
-const RatingWrapper = styled.div`
-  //
-`;
+const RatingWrapper = styled.div``;
 
 const InfoWrapper = styled.div`
   margin-bottom: 10px;
@@ -300,8 +310,8 @@ const RateWrapper = styled.div`
 `;
 
 const OverView = styled.div`
-  width: 80%;
-  line-height: 20px;
+  width: 95%;
+  line-height: 22px;
 `;
 
 const BuyWrapper = styled.div`
