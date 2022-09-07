@@ -54,3 +54,13 @@ export async function fetchReview(id) {
     res => res.json()
   );
 }
+
+export async function fetchRecommendations(id) {
+  return await fetch(
+    `${BASE_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=ko-KR&page=1`
+  ).then(res => res.json());
+}
+
+export async function fetchKeywords(id) {
+  return await fetch(`${BASE_URL}/movie/${id}/keywords?api_key=${API_KEY}`).then(res => res.json());
+}
