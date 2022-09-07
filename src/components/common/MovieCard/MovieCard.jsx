@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const MovieCard = ({ CardData }) => {
   const [movieCardDate, setMovieCardDate] = useState('');
-  console.log(CardData);
   useEffect(() => {
     setMovieCardDate(CardData);
   }, []);
@@ -88,9 +87,13 @@ const Back = styled.div`
 `;
 
 const Rate = styled.div`
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 600;
   color: #959595;
+  margin-top: 12px;
+  @media (max-width: 722px) {
+    font-size: 16px;
+  }
 `;
 
 const MovieHeader = styled.div`
@@ -103,7 +106,6 @@ const MovieHeader = styled.div`
 const Title = styled.div`
   color: #959595;
   font-weight: 400;
-  width: 240px;
   font-size: 18px;
 `;
 
@@ -141,16 +143,17 @@ const Img = styled.img`
   margin-right: 20px;
   height: 120px;
   box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+  @media (max-width: 722px) {
+    height: 100%;
+  }
 `;
 
 const Desc = styled.div`
   padding: 25px;
   height: 60%;
   width: 100%;
-`;
-
-const MovieSocial = styled.div`
-  height: 10%;
-  padding-left: 15px;
-  padding-bottom: 20px;
+  @media (max-width: 722px) {
+    height: 100%;
+    padding: 0px 25px;
+  }
 `;
