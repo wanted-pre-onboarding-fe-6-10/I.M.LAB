@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating';
 const DetailHeader = () => {
   const [detailData, setDetailData] = useState(null);
   const [videosData, setVideosData] = useState(null);
-  const [buyData, setBuyData] = useState(null);
+  const [buyData = {}, setBuyData] = useState(null);
   const [iconStatus, setIconStatus] = useState({
     heartStatus: false,
     markStatus: false,
@@ -21,7 +21,8 @@ const DetailHeader = () => {
 
   const { path } = useParams();
 
-  // console.log(detailData); // [TODO] 429번은 아예 안나옴
+  console.log(buyData);
+  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   useEffect(() => {
     fetchMovieDetail(path).then(result => setDetailData(result));
