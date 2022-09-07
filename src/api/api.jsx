@@ -76,3 +76,15 @@ export async function fetchMovieBuy(id) {
     `${BASE_URL}/movie/${id}/watch/providers?api_key=${API_KEY}&language=ko-KR`
   ).then(res => res.json());
 }
+
+export async function fetchSearch(query, page) {
+  return await fetch(
+    `${BASE_URL}/search/multi?api_key=${API_KEY}&include_adult=false&language=ko-KR&query=${query}&page=${page}`
+  ).then(res => res.json());
+}
+
+export async function fetchTranding() {
+  return await fetch(
+    `${BASE_URL}/trending/all/day?api_key=${API_KEY}&include_adult=false&language=ko-KR`
+  ).then(res => res.json());
+}
