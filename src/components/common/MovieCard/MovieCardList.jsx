@@ -21,7 +21,7 @@ const MovieCardList = () => {
           ))}
         </ContainerGridBox>
       ) : (
-        <div>Loading..</div>
+        <div>Loading...</div>
       )}
     </>
   );
@@ -30,7 +30,7 @@ const MovieCardList = () => {
 const ContainerGridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, auto));
-  gap: 100px 10px;
+  gap: 80px 10px;
 `;
 
 export default MovieCardList;

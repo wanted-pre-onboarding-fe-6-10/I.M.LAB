@@ -21,7 +21,7 @@ const MovieCard = ({ CardData }) => {
                   <Img src={`https://image.tmdb.org/t/p/w500${movieCardDate.poster_path}`} />
                   <Title>{movieCardDate.title}</Title>
                   <MovieMadeAt>{movieCardDate.release_date}</MovieMadeAt>
-                  <Rate>평점 8.4</Rate>
+                  <Rate>평점 {movieCardDate.vote_average}</Rate>
                 </MovieHeader>
                 <Desc>
                   <Overview>{movieCardDate.overview}</Overview>
