@@ -94,7 +94,7 @@ const DetailHeader = () => {
                   </IconButton>
                   <Rating
                     name="half-rating"
-                    precision={0.4}
+                    precision={0.5}
                     value={value}
                     style={{
                       fontSize: '30px',
@@ -259,7 +259,7 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   border-radius: 50%;
 `;
 
-const InfoWrapper = styled.p`
+const InfoWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
