@@ -9,9 +9,9 @@ import { lightTheme } from '../../../styles/theme';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovieCredits } from '../../../api/api';
 
-function MovieCast() {
+function MovieCast({ path }) {
   const [casts, setCasts] = useState([]);
-  const { data } = useQuery(['detail'], () => fetchMovieCredits(361743));
+  const { data } = useQuery(['detail'], () => fetchMovieCredits(path));
 
   useEffect(() => {
     if (data) {

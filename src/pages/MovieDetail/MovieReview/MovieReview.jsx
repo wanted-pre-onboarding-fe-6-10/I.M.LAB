@@ -1,15 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightTheme } from '../../../styles/theme';
 import MovieReviewModal from '../MovieOpinion/MovieReviewModal';
 
 function MovieReview() {
+  const { path } = useParams();
   return (
     <MovieReviewBlock>
       <MovieInfo>11</MovieInfo>
       <MovieReviewBox>
         <ReviewButton>리뷰 쓰기</ReviewButton>
-        <MovieReviewModal />
+        <MovieReviewModal path={path} />
       </MovieReviewBox>
     </MovieReviewBlock>
   );

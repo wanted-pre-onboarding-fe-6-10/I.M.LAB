@@ -9,9 +9,9 @@ import styled from 'styled-components';
 import { fetchRecommendations } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
 
-function MovieSuggest() {
+function MovieSuggest({ path }) {
   const [recommends, setRecommend] = useState([]);
-  const { data } = useQuery(['recommendation'], () => fetchRecommendations(429));
+  const { data } = useQuery(['recommendation'], () => fetchRecommendations(path));
 
   useEffect(() => {
     if (data) {
