@@ -18,10 +18,7 @@ const DetailHeader = ({ path }) => {
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
 
-  const { path } = useParams();
-
-  console.log(buyData);
-  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
+  console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   useEffect(() => {
     fetchMovieDetail(path).then(result => setDetailData(result));
@@ -35,7 +32,9 @@ const DetailHeader = ({ path }) => {
         <Container>
           <BackdropImg
             alt="img"
-            src={`https://image.tmdb.org/t/p/original${detailData?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original${
+              detailData?.backdrop_path ?? detailData?.poster_path
+            }`}
           />
 
           <HeaderBox
