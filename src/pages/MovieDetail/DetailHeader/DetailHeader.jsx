@@ -5,7 +5,6 @@ import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/a
 import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Rating from '@mui/material/Rating';
-import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../../../store/movieSlice';
 
@@ -19,7 +18,6 @@ const DetailHeader = ({ path }) => {
   });
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
-  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   const dispatch = useDispatch();
   const detailData = useSelector(state => state.movies[path]);
@@ -30,7 +28,7 @@ const DetailHeader = ({ path }) => {
     });
     fetchMovieVides(path).then(result => setVideosData(result));
     fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
-  }, []);
+  }, [dispatch, path]);
 
   return (
     <div>
@@ -287,9 +285,7 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   border-radius: 50%;
 `;
 
-const RatingWrapper = styled.div`
-  //
-`;
+const RatingWrapper = styled.div``;
 
 const InfoWrapper = styled.div`
   margin-bottom: 10px;
