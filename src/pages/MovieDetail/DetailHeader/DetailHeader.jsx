@@ -92,7 +92,6 @@ const DetailHeader = () => {
                   >
                     <BsFillStarFill />
                   </IconButton>
-                  {/* 별점 */}
                   <Rating
                     name="half-rating"
                     precision={0.5}
