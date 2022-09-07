@@ -2,7 +2,8 @@ import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { fetchNowPlayingMovie, fetchTopRatedMovie } from '../../api/api';
-
+import MovieCardList from '../../components/common/MovieCard/MovieCardList';
+import MovieCardGridBox from '../../components/common/MovieCard/GridBox';
 const TopRated = () => {
   const { ref, inView } = useInView();
   const { status, data, fetchNextPage, hasNextPage } = useInfiniteQuery(
@@ -28,20 +29,15 @@ const TopRated = () => {
       {status === 'loading' ? (
         <>Loading...</>
       ) : (
-        <div>
-          {data.pages.map((page, i) => (
-            <React.Fragment key={i}>
-              {page.results.map(v => (
-                <div key={v.id}>
-                  <div>{v.original_title}</div>
-                  <div>{v.title}</div>
-                  <div>{v.release_date}</div>
-                </div>
-              ))}
-            </React.Fragment>
-          ))}
+        <>
+          <MovieCardGridBox>
+            {data.pages.map(res => (
+              <MovieCardList MovieListValue={res.results} key={`${res.page}-cardList`} />
+            ))}
+          </MovieCardGridBox>
+          ))
           <div ref={ref}>{inView}</div>
-        </div>
+        </>
       )}
     </>
   );
