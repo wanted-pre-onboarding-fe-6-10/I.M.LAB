@@ -60,6 +60,8 @@ const RateNum = styled.p`
   font-size: 20px;
 `;
 
-const TextArea = styled.textarea``;
+const TextArea = styled.textarea`
+  //
+`;
 
 export default ReviewWritte;
