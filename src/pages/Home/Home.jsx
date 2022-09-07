@@ -6,7 +6,6 @@ import ContentsBox from './TopContents/ContentsBox';
 const Home = () => {
   return (
     <Container>
-      Home Page
       <ContentsBox />
       <MoviesTab />
       <PopularMoviesList />
@@ -16,7 +15,7 @@ const Home = () => {
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: black;
+  background-color: ${props => props.theme.bgColor};
 `;
 
 export default Home;
