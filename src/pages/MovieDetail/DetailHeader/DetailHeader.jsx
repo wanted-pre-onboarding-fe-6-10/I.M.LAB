@@ -5,9 +5,10 @@ import { fetchMovieDetail, fetchMovieVides, fetchMovieBuy } from '../../../api/a
 import { BsHeartFill, BsFillBookmarkFill, BsFillStarFill } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Rating from '@mui/material/Rating';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../../../store/movieSlice';
 
 const DetailHeader = ({ path }) => {
-  const [detailData, setDetailData] = useState(null);
   const [videosData, setVideosData] = useState(null);
   const [buyData = {}, setBuyData] = useState(null);
   const [iconStatus, setIconStatus] = useState({
@@ -17,11 +18,15 @@ const DetailHeader = ({ path }) => {
   });
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
+  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
-  console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
+  const dispatch = useDispatch();
+  const detailData = useSelector(state => state.movies[path]);
 
   useEffect(() => {
-    fetchMovieDetail(path).then(result => setDetailData(result));
+    fetchMovieDetail(path).then(result => {
+      dispatch(add(result));
+    });
     fetchMovieVides(path).then(result => setVideosData(result));
     fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
   }, []);
