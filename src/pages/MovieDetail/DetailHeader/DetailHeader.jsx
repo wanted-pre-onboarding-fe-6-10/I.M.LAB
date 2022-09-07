@@ -91,13 +91,12 @@ const DetailHeader = ({ path }) => {
                     <BsFillBookmarkFill />
                   </IconButton>
                   <IconButton
-                    onClick={() => setRateShow(prev => !prev)} //  show만 조절
-                    status={rateValue > 0 ? true : false} //  색깔 조절
+                    onClick={() => setRateShow(prev => !prev)}
+                    status={rateValue > 0 ? true : false}
                   >
                     <BsFillStarFill />
                   </IconButton>
 
-                  {/* 평점 라벨 */}
                   <RatingWrapper
                     style={{
                       backgroundColor: 'lightgray',
