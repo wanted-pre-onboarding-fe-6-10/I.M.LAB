@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Rating from '@mui/material/Rating';
 import { FaUserAlt } from 'react-icons/fa';
 
-const ReviewWritte = () => {
+const ReviewWrite = () => {
   let [rateValue, setRateValue] = useState(0);
 
   return (
-    <WritteContainer>
+    <WriteContainer>
       <Header>
         <HeaderMessage>별점을 선택해주세요.</HeaderMessage>
         <RatingBox>
@@ -41,11 +41,11 @@ const ReviewWritte = () => {
           <button>확인</button>
         </footer>
       </Header>
-    </WritteContainer>
+    </WriteContainer>
   );
 };
 
-const WritteContainer = styled.div`
+const WriteContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: aliceblue;
@@ -108,4 +108,4 @@ const InputLabel = styled.label`
   margin-top: 5px;
 `;
 
-export default ReviewWritte;
+export default ReviewWrite;
