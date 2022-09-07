@@ -9,15 +9,16 @@ import { lightTheme } from '../../../styles/theme';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovieCredits } from '../../../api/api';
 
+const IMAGE_URL = process.env.REACT_APP_IMG_BASE_URL;
 function MovieCast({ path }) {
   const [casts, setCasts] = useState([]);
-  const { data } = useQuery(['detail'], () => fetchMovieCredits(path));
+  const { data: movieCredits } = useQuery(['detail'], () => fetchMovieCredits(path));
 
   useEffect(() => {
-    if (data) {
-      setCasts(data.cast);
+    if (movieCredits) {
+      setCasts(movieCredits.cast);
     }
-  }, [data]);
+  }, [movieCredits]);
 
   return (
     <MovieCastBlock>
@@ -32,10 +33,7 @@ function MovieCast({ path }) {
           {casts.map(cast => (
             <SwiperSlide key={cast.cast_id}>
               {cast.profile_path ? (
-                <CastImage
-                  src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-                  alt="castProfile"
-                />
+                <CastImage src={`${IMAGE_URL}/${cast.profile_path}`} alt="castProfile" />
               ) : (
                 <CastDummyImage />
               )}

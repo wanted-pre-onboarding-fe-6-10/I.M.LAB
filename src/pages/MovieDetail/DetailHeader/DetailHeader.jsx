@@ -19,24 +19,15 @@ const DetailHeader = ({ path }) => {
   const [rateValue, setRateValue] = useState(0);
   let [rateShow, setRateShow] = useState(false);
 
-  // const { data: movieDetail } = useQuery(['detail'], () => fetchMovieDetail(path));
-  // const { data: movieVideo } = useQuery(['video'], () => fetchMovieVides(path));
-  // const { data: movieBuy } = useQuery(['buy'], () => fetchMovieBuy(path));
-
-  // console.log(movieBuy);
-
+  console.log(buyData);
   // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   useEffect(() => {
     fetchMovieDetail(path).then(result => setDetailData(result));
     fetchMovieVides(path).then(result => setVideosData(result));
     fetchMovieBuy(path).then(result => setBuyData(result.results.KR));
-    // setDetailData(movieDetail);
-    // setVideosData(movieVideo);
-    // setBuyData(movieBuy.results.KR);
   }, []);
 
-  console.log(buyData);
   return (
     <div>
       {detailData && videosData && buyData && (

@@ -6,13 +6,13 @@ import { lightTheme } from '../../../styles/theme';
 
 function MovieExtraDetail({ path }) {
   const [keywords, setKeywords] = useState([]);
-  const { data } = useQuery(['keywords'], () => fetchKeywords(path));
+  const { data: movieKeywords } = useQuery(['keywords'], () => fetchKeywords(path));
 
   useEffect(() => {
-    if (data) {
-      setKeywords(data.keywords);
+    if (movieKeywords) {
+      setKeywords(movieKeywords.keywords);
     }
-  }, [data]);
+  }, [movieKeywords]);
 
   return (
     <MovieExtraDetailBlock>

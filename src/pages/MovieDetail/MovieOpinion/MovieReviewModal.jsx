@@ -7,13 +7,13 @@ import { AiFillStar } from 'react-icons/ai';
 
 function MovieReviewModal({ path }) {
   const [reviews, setReviews] = useState([]);
-  const { data } = useQuery(['reviews'], () => fetchReview(path));
+  const { data: movieReviews } = useQuery(['reviews'], () => fetchReview(path));
 
   useEffect(() => {
-    if (data) {
-      setReviews(data.results.slice(0, 3));
+    if (movieReviews) {
+      setReviews(movieReviews.results.slice(0, 3));
     }
-  }, [data]);
+  }, [movieReviews]);
 
   return reviews.length === 0 ? (
     <MovieOpinionBlank>

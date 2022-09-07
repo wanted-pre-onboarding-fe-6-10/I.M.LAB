@@ -9,15 +9,16 @@ import styled from 'styled-components';
 import { fetchRecommendations } from '../../../api/api';
 import { lightTheme } from '../../../styles/theme';
 
+const IMAGE_URL = process.env.REACT_APP_IMG_BASE_URL;
 function MovieSuggest({ path }) {
   const [recommends, setRecommend] = useState([]);
-  const { data } = useQuery(['recommendation'], () => fetchRecommendations(path));
+  const { data: movieRecommend } = useQuery(['recommendation'], () => fetchRecommendations(path));
 
   useEffect(() => {
-    if (data) {
-      setRecommend(data.results);
+    if (movieRecommend) {
+      setRecommend(movieRecommend.results);
     }
-  }, [data]);
+  }, [movieRecommend]);
 
   return (
     <MovieSuggestBlock>
@@ -31,10 +32,7 @@ function MovieSuggest({ path }) {
         >
           {recommends.map(recommend => (
             <SwiperSlide key={recommend.id}>
-              <RecommendImage
-                src={`https://image.tmdb.org/t/p/w500/${recommend.backdrop_path}`}
-                alt="recommendImg"
-              />
+              <RecommendImage src={`${IMAGE_URL}/${recommend.backdrop_path}`} alt="recommendImg" />
               <RecommendInfo>
                 <span>{recommend.title}</span>
                 <span>{Math.round(recommend.vote_average * 10)}%</span>
