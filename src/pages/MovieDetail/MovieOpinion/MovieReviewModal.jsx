@@ -11,9 +11,10 @@ function MovieReviewModal() {
 
   useEffect(() => {
     if (data) {
-      setReviews(data.results);
+      setReviews(data.results.slice(0, 3));
     }
   }, [data]);
+
   return reviews.length === 0 ? (
     <MovieOpinionBlank>
       <span>리뷰가 없습니다</span>
