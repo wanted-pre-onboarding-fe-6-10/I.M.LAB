@@ -15,7 +15,6 @@ const ContentsBox = () => {
     } else {
       setMoveImg(prev => prev + value);
     }
-    console.log(moveImg);
   };
 
   const handleMovePrev = value => {
@@ -52,7 +51,7 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 2000vw;
-  margin-left: ${props => props.move}%;
+  margin-left: ${props => props.move}vw;
 `;
 
 export default ContentsBox;
