@@ -43,6 +43,8 @@ const Tabs = styled.div`
   display: flex;
   justify-content: space-between;
   align-self: center;
+  margin-top: 20px;
+  align-items: center;
 `;
 
 const Tab = styled.div`
@@ -61,6 +63,7 @@ const Tab = styled.div`
   ${props =>
     props.focused &&
     `font-weight: 600;
+    font-size: x-large;
     color: ${props.theme.ownColor};
     :hover {
       color: ${props.theme.ownColorHover};
