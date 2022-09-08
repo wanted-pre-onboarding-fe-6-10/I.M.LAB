@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DetailHeader } from './DetailHeader';
+import DetailHeader from './DetailHeader/DetailHeader';
 import { useParams } from 'react-router-dom';
 import { MovieCast } from './MovieCast';
 import { MovieExtraDetail } from './MovieExtraDetail';
