@@ -1,5 +1,3 @@
-
-export const sortBy = (data, key) => {
 const sortBy = (data, key) => {
   switch (key) {
     case 'title_asc':
