@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { IMG_BASE_URL } from './Temp';
 
 const MoviesCard = ({ item, width }) => {
   const navigate = useNavigate();
 
   return (
     <Wrapper onClick={() => navigate(`/movieDetail/${item.id}`)} width={width ?? '15%'}>
-      <MoviePoster src={IMG_BASE_URL + item.poster_path} alt={item.title} />
+      <MoviePoster src={process.env.REACT_APP_IMG_BASE_URL + item.poster_path} alt={item.title} />
       <MovieDetail className="movie-detail">
         <Title>{item.title}</Title>
         <ReleaseDate>{item.release_date}</ReleaseDate>
@@ -28,9 +27,9 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 4px;
   margin: 32px 0;
-  width: 15%;
   width: ${props => props.width};
   box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+  align-items: stretch;
   cursor: pointer;
 
   & + & {

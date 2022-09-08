@@ -36,8 +36,7 @@ const PopularMoviesList = () => {
 };
 
 const Box = styled.div`
-  /* display: grid; */
-  margin: 60px 100px;
+  padding: 60px 100px;
 `;
 
 const Header = styled.h2`
@@ -53,15 +52,11 @@ const GuideText = styled.div`
 
 const Wrapper = styled.div`
   display: grid;
-  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
-
-  grid-template-columns: repeat(5, minmax(300px, 1fr));
-  min-width: 10%;
-  max-width: 50%;
   grid-column-gap: 5px;
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
 
   @media (max-width: 650px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
