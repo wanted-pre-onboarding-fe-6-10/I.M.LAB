@@ -24,7 +24,6 @@ const NowPlaying = () => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    ['infinite', 'top_rated'],
     ['infinite', 'now_playing'],
     ({ pageParam = 1 }) => fetchNowPlayingMovie(pageParam),
     {
