@@ -47,6 +47,9 @@ const ContentsBox = () => {
 
 const Container = styled.div`
   overflow: hidden;
+  @media screen and (max-width: 850px) {
+    overflow: scroll;
+  }
 `;
 
 const Box = styled.div`

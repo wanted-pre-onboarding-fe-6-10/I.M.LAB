@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { lightTheme, darkTheme } from '../../../styles/theme';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
+import getGenre from '../MoviesTab/getGenre';
 
 const TopContents = ({ movies, toNext, toPrev }) => {
-  const imgURL = process.env.REACT_APP_IMG_URL;
+  const imgURL = process.env.REACT_APP_IMG_BASE_URL;
   const navigate = useNavigate();
 
   const movieOverView = movies.overview.substr(0, 150);
@@ -13,7 +14,6 @@ const TopContents = ({ movies, toNext, toPrev }) => {
 
   return (
     <Container>
-      <ContainerTitle>Popular Movies TOP 20</ContainerTitle>
       <MoveButton onClick={() => toPrev(100)}>
         <GrPrevious />
       </MoveButton>
@@ -27,6 +27,11 @@ const TopContents = ({ movies, toNext, toPrev }) => {
             </SubTitle>
           </MovieTitle>
           <RateWrapper>{movieRate}</RateWrapper>
+          <GenreGroup>
+            {movies.genre_ids.map(item => (
+              <GenreBadge key={item}>{getGenre(item)}</GenreBadge>
+            ))}
+          </GenreGroup>
           <OverView>{movieOverView.length ? movieOverView + ' ...' : movieOverView}</OverView>
         </Wrapper>
       </Box>
@@ -53,7 +58,7 @@ const Box = styled.div`
   padding: 3em;
   position: relative;
   width: 1440px;
-  height: 500px;
+  height: 400px;
   &::before {
     content: '';
     position: absolute;
@@ -67,21 +72,28 @@ const Box = styled.div`
     right: 0px;
     bottom: 0px;
   }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 
 const Poster = styled.img`
   border-radius: 10px;
-  border: 2px solid ${lightTheme.boxColor};
+  border: 3px solid ${lightTheme.borderColor};
   position: relative;
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
   &:hover {
     margin: -1em;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 200px;
   }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 3em;
+  margin: 1em 3em;
   position: relative;
 `;
 
@@ -97,6 +109,9 @@ const MoveButton = styled.button`
   &:hover {
     opacity: 1;
   }
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
 `;
 
 const MovieTitle = styled.div`
@@ -104,31 +119,68 @@ const MovieTitle = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 2em;
+  @media screen and (max-width: 800px) {
+    margin-bottom: 0;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 2.5em;
+  font-size: 2.2em;
   font-weight: bold;
   color: ${lightTheme.textColor};
+  @media screen and (max-width: 800px) {
+    font-size: 1em;
+  }
 `;
 
 const SubTitle = styled.h3`
   font-size: 1.5em;
   color: #424242;
+  margin-right: 1em;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const ReleaseDate = styled.span`
   font-size: 0.7em;
   color: #424242;
-  margin-left: 1em;
+`;
+
+const GenreGroup = styled.div`
+  display: flex;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
+`;
+
+const GenreBadge = styled.span`
+  margin-right: 1em;
+  background-color: orange;
+  font-size: 0.8em;
+  padding: 3px;
+  margin-bottom: 2px;
+  color: ${darkTheme.textColor};
+  border-radius: 4px;
+  text-align: center;
+  @media screen and (max-width: 800px) {
+    width: 50%;
+  }
 `;
 
 const OverView = styled.p`
   margin: 2em 0;
-  width: 85%;
+  width: 70%;
   font-size: 1em;
   color: ${lightTheme.textColor};
   line-height: 1.7em;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 const RateWrapper = styled.div`
@@ -136,14 +188,9 @@ const RateWrapper = styled.div`
   margin-bottom: 10px;
   font-weight: bold;
   color: ${lightTheme.textColor};
-`;
-
-const ContainerTitle = styled.div`
-  position: absolute;
-  top: 0.5em;
-  left: 10em;
-  font-size: 1.5em;
-  font-weight: bold;
+  @media screen and (max-width: 820px) {
+    display: none;
+  }
 `;
 
 export default TopContents;
