@@ -16,7 +16,7 @@ const UpcomingList = () => {
           {data.results.map(item => (
             <MoviesCard key={item.id} item={item} />
           ))}
-          <SeeMoreButton to="/대체" />
+          <SeeMoreButton to="/upcoming" />
         </>
       ) : (
         '로딩중 '
