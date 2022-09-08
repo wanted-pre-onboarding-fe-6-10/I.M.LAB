@@ -110,6 +110,7 @@ const CollapseBox = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
+  z-index: 1000;
 `;
 const CollapseWrapper = styled.div`
   width: 1300px;
