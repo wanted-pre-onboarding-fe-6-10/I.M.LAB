@@ -8,6 +8,11 @@ import { sortBy } from '../../utils/sort';
 import Sort from '../../components/filter/sort';
 import Filter from '../../components/filter/filter';
 import styled from 'styled-components';
+import sortBy from '../../utils/sort';
+import Sort from '../../components/filter/sort';
+import Filter from '../../components/filter/filter';
+import styled from 'styled-components';
+import LoadingMovieCard from '../../components/common/MovieCard/LoadingMovieCard';
 const NowPlaying = () => {
   const { ref, inView } = useInView();
   let pageIndex = 0;
@@ -24,6 +29,7 @@ const NowPlaying = () => {
     hasNextPage,
   } = useInfiniteQuery(
     ['infinite', 'top_rated'],
+    ['infinite', 'now_playing'],
     ({ pageParam = 1 }) => fetchNowPlayingMovie(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -95,6 +101,9 @@ const NowPlaying = () => {
       <Title>Now Playing Movies</Title>
       {status === 'loading' ? (
         <>Loading...</>
+        <>
+          <LoadingMovieCard />
+        </>
       ) : (
         <MovieListBox>
           <SelectWrapper>

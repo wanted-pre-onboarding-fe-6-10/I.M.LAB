@@ -5,7 +5,7 @@ import Collapse from '@mui/material/Collapse';
 import _ from 'lodash';
 import { fetchSearch, fetchTranding } from '../../api/api';
 import SearchItem from './SearchItem';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -43,7 +43,10 @@ const Nav = () => {
   };
 
   const onRequestSearch = value => {
-    navigate(`/Search?searchWord=${value}`);
+    navigate({
+      pathname: `/search`,
+      search: `?${createSearchParams({ value })}`,
+    });
   };
 
   return (
@@ -58,6 +61,9 @@ const Nav = () => {
               <Menu href="/now_playing">nowplaying</Menu>
               <Menu href="/upcoming">upcoming </Menu>
               <Menu href="/top_rated">toprated</Menu>
+              <Menu href="/nowplaying">NowPlaying</Menu>
+              <Menu href="/upcoming">Upcoming </Menu>
+              <Menu href="/toprated">TopRated</Menu>
             </MenuBox>
           </RouterBox>
           <UserBox>
