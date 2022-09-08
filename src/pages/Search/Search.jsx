@@ -34,8 +34,6 @@ const Search = () => {
       },
     }
   );
-  console.log(searchMoviePage);
-  console.log(query);
   const getTMDB = async page => {
     const res = await fetchSearch(query, page);
     if (!total) {
