@@ -1,3 +1,4 @@
+import React from 'react';
 import LoadingMovieCard from './LoadingMovieCard';
 import MovieCard from './MovieCard';
 
