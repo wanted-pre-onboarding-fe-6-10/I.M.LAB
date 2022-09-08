@@ -4,10 +4,11 @@ import { useInView } from 'react-intersection-observer';
 import { fetchTopRatedMovie } from '../../api/api';
 import MovieCardList from '../../components/common/MovieCard/MovieCardList';
 import MovieCardGridBox from '../../components/common/MovieCard/GridBox';
-import { sortBy } from '../../utils/sort';
+import sortBy from '../../utils/sort';
 import Sort from '../../components/filter/sort';
 import Filter from '../../components/filter/filter';
 import styled from 'styled-components';
+import LoadingMovieCard from './../../components/common/MovieCard/LoadingMovieCard';
 const TopRated = () => {
   const { ref, inView } = useInView();
   let pageIndex = 0;
@@ -94,7 +95,9 @@ const TopRated = () => {
     <Container>
       <Title>Top Rated Movies</Title>
       {status === 'loading' ? (
-        <>Loading...</>
+        <>
+          <LoadingMovieCard />
+        </>
       ) : (
         <MovieListBox>
           <SelectWrapper>

@@ -1,4 +1,4 @@
-export const sortBy = (data, key) => {
+const sortBy = (data, key) => {
   switch (key) {
     case 'title_asc':
       return data.sort((a, b) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1));
@@ -22,3 +22,5 @@ export const sortBy = (data, key) => {
       return data.sort((a, b) => (a.vote_average > b.vote_average ? -1 : 1));
   }
 };
+
+export default sortBy;
