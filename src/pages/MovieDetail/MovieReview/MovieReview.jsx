@@ -47,7 +47,7 @@ function MovieReview() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <ReviewWrite />
+              <ReviewWrite setOpen={setOpen} />
             </Box>
           </Modal>
           <MovieReviewModal path={path} />
@@ -62,6 +62,7 @@ export default MovieReview;
 const MovieReviewBlock = styled.div`
   width: 100%;
 `;
+
 const MovieInfo = styled.div`
   width: 100%;
   height: 100px;
@@ -82,6 +83,7 @@ const ReviewImage = styled.img`
   border-radius: 7px;
   margin-right: 1.5rem;
 `;
+
 const ReviewTextBox = styled.div`
   .reviewTextTop {
     span {
