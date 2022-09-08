@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import getGenre from './getGenre';
 
 const MoviesCard = ({ item, width }) => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const MoviesCard = ({ item, width }) => {
         <ReleaseDate>{item.release_date}</ReleaseDate>
         <GenreGroup>
           {item.genre_ids.map(item => (
-            <GenreBadge key={item}>{item}</GenreBadge>
+            <GenreBadge key={item}>{getGenre(item)}</GenreBadge>
           ))}
         </GenreGroup>
         <Overview>{item.overview}</Overview>
