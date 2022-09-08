@@ -20,6 +20,10 @@ function MovieSuggest({ path }) {
     }
   }, [movieRecommend]);
 
+  const onMoveMovieDetail = id => {
+    window.location.replace(`/movieDetail/${id}`);
+  };
+
   return (
     movieRecommend && (
       <MovieSuggestBlock>
@@ -32,7 +36,7 @@ function MovieSuggest({ path }) {
             slidesPerView={4}
           >
             {recommends.map(recommend => (
-              <SwiperSlide key={recommend.id}>
+              <SwiperSlide key={recommend.id} onClick={() => onMoveMovieDetail(recommend.id)}>
                 <RecommendImage
                   src={`${IMAGE_URL}/${recommend.backdrop_path}`}
                   alt="recommendImg"
