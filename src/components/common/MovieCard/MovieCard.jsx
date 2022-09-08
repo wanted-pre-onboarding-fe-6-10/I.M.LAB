@@ -23,7 +23,7 @@ const MovieCard = ({ CardData }) => {
             <Back>
               <MovieHeader>
                 <Img src={`https://image.tmdb.org/t/p/w500${movieCardDate.poster_path}`} />
-                <Title>{movieCardDate.title}</Title>
+                <Title>{movieCardDate.title || movieCardDate.name}</Title>
                 <MovieMadeAt>{movieCardDate.release_date}</MovieMadeAt>
                 <Rate>평점 {movieCardDate.vote_average}</Rate>
               </MovieHeader>
@@ -32,7 +32,7 @@ const MovieCard = ({ CardData }) => {
               </Desc>
             </Back>
           </Container>
-          <MovieTitle>{movieCardDate.title}</MovieTitle>
+          <MovieTitle>{movieCardDate.title || movieCardDate.name}</MovieTitle>
         </ATag>
       ) : (
         <Container>
@@ -137,16 +137,14 @@ const MovieMadeAt = styled.h4`
 `;
 
 const Overview = styled.p`
-  display: inline-block;
+  display: -webkit-box !important;
   color: #959595;
   margin-top: 5px;
-  height: 100%;
   font-size: 13px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 9;
 `;
 
 const Img = styled.img`
