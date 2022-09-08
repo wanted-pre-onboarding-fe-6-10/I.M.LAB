@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DetailHeader } from './DetailHeader';
-import MovieCast from './MovieCast/MovieCast';
-import MovieOpinion from './MovieOpinion/MovieOpinion';
-import MovieSuggest from './MovieSuggest/MovieSuggest';
-import MovieExtraDetail from './MovieExtraDetail/MovieExtraDetail';
 import { useParams } from 'react-router-dom';
+import { MovieCast } from './MovieCast';
+import { MovieExtraDetail } from './MovieExtraDetail';
+import { MovieOpinion } from './MovieOpinion';
+import { MovieSuggest } from './MovieSuggest';
 
 const MovieMain = () => {
   const { path } = useParams();
