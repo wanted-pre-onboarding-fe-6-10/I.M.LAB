@@ -20,11 +20,11 @@ const Upcoming = () => {
   const [total, setTotal] = useState(0);
   const {
     status,
-    data: topRatedMoviePage,
+    data: upcomingMoviePage,
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    ['infinite', 'top_rated'],
+    ['infinite', 'upcoming'],
     ({ pageParam = 1 }) => fetchUpcomingMovie(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -116,7 +116,7 @@ const Upcoming = () => {
             </MovieCardGridBox>
           ) : (
             <MovieCardGridBox>
-              {topRatedMoviePage.pages.map(res => (
+              {upcomingMoviePage.pages.map(res => (
                 <MovieCardList MovieListValue={res.results} key={`${res.page}-cardList`} />
               ))}
             </MovieCardGridBox>
