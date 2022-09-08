@@ -58,6 +58,9 @@ const Nav = () => {
               <LogoImg src="/assets/TKL.png" />
             </LogoBox>
             <MenuBox>
+              <Menu href="/now_playing">nowplaying</Menu>
+              <Menu href="/upcoming">upcoming </Menu>
+              <Menu href="/top_rated">toprated</Menu>
               <Menu href="/nowplaying">NowPlaying</Menu>
               <Menu href="/upcoming">Upcoming </Menu>
               <Menu href="/toprated">TopRated</Menu>
@@ -113,6 +116,7 @@ const CollapseBox = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
+  z-index: 1000;
 `;
 const CollapseWrapper = styled.div`
   width: 1300px;

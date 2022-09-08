@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { fetchUpcomingMovie } from '../../api/api';
 import MovieCardList from '../../components/common/MovieCard/MovieCardList';
 import MovieCardGridBox from '../../components/common/MovieCard/GridBox';
+import { sortBy } from '../../utils/sort';
 import sortBy from '../../utils/sort';
 import Sort from '../../components/filter/sort';
 import Filter from '../../components/filter/filter';
@@ -20,6 +21,11 @@ const Upcoming = () => {
   const [total, setTotal] = useState(0);
   const {
     status,
+    data: topRatedMoviePage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    ['infinite', 'top_rated'],
     data: upcomingMoviePage,
     fetchNextPage,
     hasNextPage,
@@ -116,6 +122,7 @@ const Upcoming = () => {
             </MovieCardGridBox>
           ) : (
             <MovieCardGridBox>
+              {topRatedMoviePage.pages.map(res => (
               {upcomingMoviePage.pages.map(res => (
                 <MovieCardList MovieListValue={res.results} key={`${res.page}-cardList`} />
               ))}
