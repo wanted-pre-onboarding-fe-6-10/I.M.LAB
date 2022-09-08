@@ -21,6 +21,8 @@ const DetailHeader = ({ path }) => {
 
   const dispatch = useDispatch();
   const detailData = useSelector(state => state.movies[path]);
+  console.log(buyData);
+  // console.log(detailData); // [TODO] 60625, 429번은 아예 안나옴
 
   useEffect(() => {
     fetchMovieDetail(path).then(result => {

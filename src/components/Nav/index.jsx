@@ -52,7 +52,7 @@ const Nav = () => {
         <NavBox>
           <RouterBox>
             <LogoBox href="/">
-              <LogoImg src="/assets/logo3.png" />
+              <LogoImg src="/assets/TKL.png" />
             </LogoBox>
             <MenuBox>
               <Menu href="#">nowplaying</Menu>
@@ -128,6 +128,8 @@ const LogoBox = styled.div``;
 const LogoImg = styled.img`
   display: block;
   margin: auto 0px;
+  width: 80px;
+  height: 80px;
 `;
 const RouterBox = styled.div`
   display: flex;

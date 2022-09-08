@@ -4,6 +4,8 @@ import MovieReview from './pages/MovieDetail/MovieReview/MovieReview';
 import MovieDetail from './pages/MovieDetail/MovieMain';
 import Nav from './components/Nav';
 import TopRated from './pages/TopRated/TopRated';
+import NowPlaying from './pages/NowPlaying/NowPlaying';
+import Upcoming from './pages/Upcoming/Upcoming';
 
 const Router = () => {
   return (
@@ -14,6 +16,8 @@ const Router = () => {
         <Route path="/movieDetail/:path/reviews" element={<MovieReview />} />
         <Route path="/movieDetail/:path" element={<MovieDetail />} />
         <Route path="/top_rated" element={<TopRated />} />
+        <Route path="/now_playing" element={<NowPlaying />} />
+        <Route path="/upcoming" element={<Upcoming />} />
       </Routes>
     </BrowserRouter>
   );
