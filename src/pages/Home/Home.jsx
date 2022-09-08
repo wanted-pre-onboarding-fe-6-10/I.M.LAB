@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import MoviesTab from './MoviesTab/MoviesTab';
 import PopularMoviesList from './PopularMoviesList/PopularMoviesList';
+import ContentsBox from './TopContents/ContentsBox';
 
 const Home = () => {
   return (
     <Container>
-      Home Page
+      <ContentsBox />
       <MoviesTab />
       <PopularMoviesList />
     </Container>
@@ -13,8 +14,9 @@ const Home = () => {
 };
 
 const Container = styled.div`
+  width: 100%;
   min-height: 100vh;
-  background-color: black;
+  background-color: ${props => props.theme.bgColor};
 `;
 
 export default Home;
