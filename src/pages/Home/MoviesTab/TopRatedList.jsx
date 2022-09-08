@@ -16,7 +16,7 @@ const TopRatedList = () => {
           {data.results.map(item => (
             <MoviesCard key={item.id} item={item} />
           ))}
-          <SeeMoreButton to="/top_rated" />
+          <SeeMoreButton to="/toprated" />
         </>
       ) : (
         '로딩중 '

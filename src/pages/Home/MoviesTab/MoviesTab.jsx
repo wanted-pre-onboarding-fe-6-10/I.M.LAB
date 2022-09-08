@@ -12,18 +12,13 @@ const MoviesTab = () => {
   return (
     <Box>
       <Tabs>
-        <Tab
-          id="now-playing-tab"
-          href="/nowplaying"
-          focused={focus === 0}
-          onClick={() => setFocus(0)}
-        >
+        <Tab id="now-playing-tab" focused={focus === 0} onClick={() => setFocus(0)}>
           Now Playing
         </Tab>
-        <Tab id="top-rated-tab" href="/toprated" focused={focus === 1} onClick={() => setFocus(1)}>
+        <Tab id="top-rated-tab" focused={focus === 1} onClick={() => setFocus(1)}>
           Top Rated
         </Tab>
-        <Tab id="upcoming-tab" href="/upcoming" focused={focus === 2} onClick={() => setFocus(2)}>
+        <Tab id="upcoming-tab" focused={focus === 2} onClick={() => setFocus(2)}>
           Upcoming
         </Tab>
         {/* <Tab onClick={() => navigate({ path: '/#prod_detail_review', search: '?idx=123' })}> */}
@@ -44,7 +39,7 @@ const Box = styled.div`
 
 const Tabs = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-self: center;
   margin-top: 20px;
   align-items: center;
@@ -54,10 +49,10 @@ const Tab = styled.div`
   color: ${props => props.theme.subTextColor};
   font-size: 1.5em;
   font-weight: 400;
-  width: 100%;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 40px;
   cursor: pointer;
+  margin-top: 30px;
 
   &:hover {
     color: ${props => props.theme.textColor};
@@ -66,7 +61,7 @@ const Tab = styled.div`
   ${props =>
     props.focused &&
     `font-weight: 600;
-    font-size: 3em;
+    font-size: 2em;
     color: ${props.theme.ownColor};
     :hover {
       color: ${props.theme.ownColorHover};
