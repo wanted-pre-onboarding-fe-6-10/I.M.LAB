@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DetailHeader } from './DetailHeader';
+import DetailHeader from './DetailHeader/DetailHeader';
 import MovieCast from './MovieCast/MovieCast';
 import MovieOpinion from './MovieOpinion/MovieOpinion';
 import MovieSuggest from './MovieSuggest/MovieSuggest';
