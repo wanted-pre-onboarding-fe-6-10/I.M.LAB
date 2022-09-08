@@ -1,12 +1,16 @@
 import { MenuItem, Select } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { genres } from './../../utils/constant';
 const Filter = ({ handleFilter }) => {
   return (
     <>
       <FormControl sx={{ width: '100px' }}>
         <InputLabel id="1">장르</InputLabel>
         <Select label="장르" onChange={e => handleFilter(e)}>
+          {/* {genres.map(v, i => {
+            <MenuItem value={v.keys()}>v[v.keys()]</MenuItem>;
+          })} */}
           <MenuItem value="28">액션</MenuItem>
           <MenuItem value="12">모험</MenuItem>
           <MenuItem value="16">애니메이션</MenuItem>

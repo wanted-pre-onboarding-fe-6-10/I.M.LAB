@@ -5,7 +5,8 @@ const LoadingMovieCard = () => {
   return arr.map(res => (
     <Container key={`${res}-LoadingCard`}>
       <Front>
-        <FrontImg src={'/assets/Spinner.gif'} />
+        {/* <FrontImg src={'/assets/Spinner.gif'} /> */}
+        ...loading
       </Front>
     </Container>
   ));
@@ -33,6 +34,7 @@ const Front = styled.div`
   width: 100%;
   height: 100%;
   transition: all 0.4s;
+  background-color: ${props => props.theme.bgColor};
   &:hover {
     opacity: 0;
   }
