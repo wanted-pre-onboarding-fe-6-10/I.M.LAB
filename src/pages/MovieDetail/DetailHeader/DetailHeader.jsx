@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../../../store/movieSlice';
 import { fetchMovieDetail, fetchMovieVides } from '../../../api/api';
-import MovieInfoBox from '../MovieInfoBox/MovieInfoBox';
+import MovieInfoTitle from '../MovieInfoBox/MovieInfoTitle';
+import MovieInfoBody from '../MovieInfoBox/MovieInfoBody';
+import MovieBuy from '../MovieInfoBox/MovieBuy';
 import { useQuery } from '@tanstack/react-query';
 
 const DetailHeader = ({ path }) => {
@@ -53,7 +55,11 @@ const DetailHeader = ({ path }) => {
             ) : (
               <NoVideoBox>no video</NoVideoBox>
             )}
-            <MovieInfoBox path={path} />
+            <InfoBox>
+              <MovieInfoTitle path={path} />
+              <MovieInfoBody path={path} />
+              <MovieBuy path={path} />
+            </InfoBox>
           </HeaderBox>
         </Container>
       )}
@@ -93,6 +99,15 @@ const NoVideoBox = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+`;
+
+const InfoBox = styled.div`
+  width: 90%;
+  padding: 0 1.3rem;
+  padding-bottom: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
 `;
 
 export default DetailHeader;
