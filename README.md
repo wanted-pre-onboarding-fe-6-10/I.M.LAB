@@ -28,8 +28,8 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
         <td align="center">홈페이지 목록 구현</td>
         <td align="center">팀장, 각 영화 페이지 데이터 처리 및 전체 디자인</td>
         <td align="center">영화 상세 페이지 구현</td>
-        <td align="center">영화 상세 페이지 구현</td>
         <td align="center">Nav, 검색 기능 구현</td>
+        <td align="center">영화 상세 페이지 구현</td>
         <td align="center">홈페이지 영화 배너 구현</td>
     </tr>
 </table>
@@ -133,15 +133,12 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
  ┗ 📜index.jsx
 ```
 
-<br>
+> ## 기능별 설명
 
-> ## 기능별 설명 / Best Practice
-
-<details>
+  <details>
   <summary>1. 홈페이지</summary>
-  홈 페이지는 크게 3개의 파트로 나눌 수 있습니다.
-
->
+  
+## 홈 페이지
 
 1. 인기 영화 Top5 배너
 2. 현재 상영중 영화 / 평점 높은 영화 / 개봉예정 영화 탭
