@@ -1,7 +1,9 @@
+import LoadingMovieCard from './LoadingMovieCard';
 import MovieCard from './MovieCard';
 
 const MovieCardList = ({ MovieListValue }) => {
   const MovieList = MovieListValue;
+
   return (
     <>
       {MovieList ? (
@@ -11,7 +13,7 @@ const MovieCardList = ({ MovieListValue }) => {
           ))}
         </>
       ) : (
-        <div>Loading...</div>
+        <LoadingMovieCard />
       )}
     </>
   );
