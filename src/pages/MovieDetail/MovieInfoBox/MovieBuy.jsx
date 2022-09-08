@@ -9,7 +9,7 @@ const MovieBuy = ({ path }) => {
 
   useEffect(() => {
     if (data) {
-      setBuyData(data.results);
+      setBuyData(data.results.KR);
     }
   }, [path, data]);
 
